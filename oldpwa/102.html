@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>AgriBOOST Data Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="icons/icon192.png">
+
+    <!-- Bootstrap Css -->
+    <link href="function/dashed/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="function/dashed/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="function/dashed/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+       
+    <link href="function/datatable/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="function/datatable/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+        
+    <!-- Responsive datatable examples -->
+    <link href="function/datatable/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
+    <script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"> </script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="apple-touch-icon" href="icons/icon192.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+   
+</head>
+
+<body data-layout="horizontal" data-topbar="colored">
+
+
+
+  <div id="menu_body"></div>
+
+
+ 
+<style>
+  /* Styles for the loader container */
+  .loader-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  /* Styles for the loader GIF image */
+  .loader {
+      width: 100px; /* Adjust the width and height as needed */
+      height: 100px;
+  }
+</style>
+<!-- Loader Container -->
+<div class="loader-container" id="loader-container">
+<img src="icons/loader.gif" alt="Loader" class="loader">
+</div>
+
+
+<script>
+const xhr = new XMLHttpRequest();
+const menu_body = document.getElementById('menu_body');
+const loaderContainer = document.getElementById('loader-container');
+
+// Show the loader before sending the XHR request
+loaderContainer.style.display = 'flex';
+
+xhr.onload = function() {
+  if (this.status === 200) {
+      menu_body.innerHTML = xhr.responseText;
+  } else {
+      console.warn('Did not receive 200 OK from response!');
+      // Redirect to login.html in case of an error
+      window.location.href = 'login.html';
+  }
+
+  // Hide the loader after the response is processed
+  loaderContainer.style.display = 'none';
+};
+
+xhr.onerror = function() {
+  console.error('An error occurred while sending the request!');
+  // Redirect to login.html on XHR error
+  window.location.href = 'login.html';
+
+  // Hide the loader on error
+  loaderContainer.style.display = 'none';
+};
+
+xhr.open('get', 'agriboostdmstransactions/102.php');
+xhr.send();
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="src/index.js"></script>
+
+
+<!-- Datatable init js -->
+<script src="function/datatable/assets/js/pages/datatables.init.js"></script>
+    <script src="function/dashed/assets/libs/jquery/jquery.min.js"></script>
+    <script src="function/dashed/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="function/dashed/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="function/dashed/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="function/dashed/assets/libs/node-waves/waves.min.js"></script>
+    <script src="function/dashed/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="function/dashed/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+    <!-- apexcharts -->
+    <script src="function/dashed/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <script src="function/dashed/assets/js/pages/dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="function/dashed/assets/js/app.js"></script>
+
+    
+<!-- jquery step -->
+<script src="function/wizard/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+
+<!-- form wizard init -->
+<script src="function/wizard/assets/js/pages/form-wizard.init.js"></script>
+
+
+<script src="function/datatable/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="function/datatable/assets/libs/jszip/jszip.min.js"></script>
+<script src="function/datatable/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="function/datatable/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="function/datatable/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="function/datatable/assets/js/pages/datatables.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
+
+
+
+<!-- parsleyjs -->
+<script src="function/formvalidation/assets/libs/parsleyjs/parsley.min.js"></script>
+
+<script src="function/formvalidation/assets/js/pages/form-validation.init.js"></script>
+
+
+</body>
+
+</html>

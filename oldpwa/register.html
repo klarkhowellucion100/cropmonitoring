@@ -1,0 +1,235 @@
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Register | AgriBOOST Data Maangement System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="icons/icon192.png">
+
+    <!-- Bootstrap Css -->
+    <link href="function/login2/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="function/login2/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="function/login2/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
+    <link rel="apple-touch-icon" href="icons/icon192.png">
+    <link rel="manifest" href="manifest.json">
+
+</head>
+
+<body class="authentication-bg" style="margin: 0; /* Remove default margin for the body */
+padding: 0; /* Remove default padding for the body */
+background: url('background/video.mp4'); /* Replace with your image URL */
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center center; /* Center the image */
+height: 200vh; /* 100% of the viewport height */">
+
+<style>
+    /* Styles for the loader container */
+    .loader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.9); /* White background with transparency */
+        z-index: 9999; /* Ensure it's above other elements */
+        display: none; /* Initially hidden */
+    }
+    
+    /* Styles for the loader GIF image */
+    .loader {
+        width: 100px; /* Adjust the width and height as needed */
+        height: 100px;
+    }
+</style>
+
+<div class="loader-container" id="loader-container">
+  <img src="icons/loader.gif" alt="Loader" class="loader">
+</div>
+
+<script>
+  // JavaScript to show/hide the loader
+  document.addEventListener("DOMContentLoaded", function () {
+      // Show the loader
+      document.getElementById("loader-container").style.display = "flex";
+
+      // Simulate a delay (e.g., loading data or performing an action)
+      setTimeout(function () {
+          // Hide the loader after a delay (simulated loading time)
+          document.getElementById("loader-container").style.display = "none";
+      }, 3000); // Adjust the delay time as needed (in milliseconds)
+  });
+</script>
+
+<video src="background/video.mp4" muted loop autoplay style="position: absolute; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -100;"></video>
+
+
+    <div class="account-pages my-5 pt-sm-5">        
+        <div class="container">            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <a href="#" class="mb-5 d-block auth-logo">
+                                <img src="icons/icon192.png" alt="" height="70" class="logo logo-dark">
+                                <img src="icons/icon192.png" alt="" height="70" class="logo logo-light">
+                            </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card">
+
+                        <div class="card-body p-4">
+                            <div class="text-center mt-2">
+                                <h5 class="text-primary">Register Now !</h5>
+                                <p class="text-muted">Sign up to access the AgriBOOST Data Management System</p>
+                            </div>
+                            <div class="p-2 mt-4">
+                            
+                                    <div class="mb-3">
+                                        <label class="form-label" for="username">Username</label>
+                                        <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter username">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <!--<div class="float-end">
+                                            <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
+                                        </div>-->
+                                        <label class="form-label" for="userpassword">Password</label>
+                                        <input type="password" class="form-control" id="pword" name="pword" placeholder="Enter password*">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="fname">Full Name</label>
+                                        <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter fullname*">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="office">Office</label>
+                                        <input type="text" class="form-control" id="office" name="office" placeholder="Enter office*">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="position">Position</label>
+                                        <input type="text" class="form-control" id="position" name="position" placeholder="Enter position*">
+                                    </div>
+
+                                     <div class="mb-3">
+                                        <label class="form-label" for="eaddr">Email Address</label>
+                                        <input type="text" class="form-control" id="eaddr" name="eaddr" placeholder="Enter email address*">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="cnumber">Contact Number</label>
+                                        <input type="text" class="form-control" id="cnumber" name="cnumber" placeholder="Enter contact number*">
+                                    </div>
+
+                                    <div class="mt-3 text-end">
+                                        <button class="btn btn-primary w-sm waves-effect waves-light w-100" id="signIn" type="submit">Create Account</button>
+                                    </div>
+
+                                    <script>
+
+                                        $(document).ready(function() {
+                                        $("#signIn").click(function(e) {
+                                            e.preventDefault();
+                            
+                                        
+                                            var uname= $('#uname').val();
+                                            var pword= $('#pword').val();
+                                            var fname= $('#fname').val();
+                                            var office= $('#office').val();
+                                            var position= $('#position').val();
+                                            var eaddr= $('#eaddr').val();
+                                            var cnumber= $('#cnumber').val();
+                            
+                                           
+                            
+                            
+                                            // Send the dataArray to the PHP script
+                                            $.ajax({
+                                                    url:"agriboostdmstransactions/registerprocess.php",
+                                                    method:"POST",
+                                                    data:{uname:uname,pword:pword,fname:fname,office:office,position:position,eaddr:eaddr,cnumber:cnumber},
+                                                    success:function(data,status){
+                                                                                        
+                                                        
+                                                        Swal.fire({
+                                                            title: 'Success',
+                                                            text: 'Registered successfully!',
+                                                            icon: 'success',
+                                                            timer: 2000
+                                                            }).then(() => {
+                                                                window.location.href = 'login.html';
+                                                            }); 
+                                                            
+                                                    }
+                                                    });
+                                        });
+                                        });
+                                                                    
+                                    </script>
+
+                                
+
+                                    <div class="mt-4 text-center">
+                                        <p class="mb-0">Don't have an account ? <a href="login.html" class="fw-medium text-primary"> Sign In now </a> </p>
+                                    </div>
+                             
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center" style="color: white;">
+                        <p>©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> ClanApp. Crafted with <i class="mdi mdi-heart text-danger"></i> by 
+                            KlarkSite</p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="src/index.js"></script>
+
+    <!-- JAVASCRIPT -->
+    <script src="function/login2/assets/libs/jquery/jquery.min.js"></script>
+    <script src="function/login2/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="function/login2/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="function/login2/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="function/login2/assets/libs/node-waves/waves.min.js"></script>
+    <script src="function/login2/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="function/login2/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+    <!-- App js -->
+    <script src="function/login2/assets/js/app.js"></script>
+
+</body>
+
+</html>

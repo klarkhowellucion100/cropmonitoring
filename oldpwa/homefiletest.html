@@ -1,0 +1,1080 @@
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>AgriBOOST Data Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="icons/icon192.png">
+
+    <!-- Bootstrap Css -->
+    <link href="function/dashed/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="function/dashed/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="function/dashed/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+       
+    <link href="function/datatable/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="function/datatable/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+        
+    <!-- Responsive datatable examples -->
+    <link href="function/datatable/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
+    <script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"> </script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="apple-touch-icon" href="icons/icon192.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+   
+</head>
+
+<body data-layout="horizontal" data-topbar="colored">
+
+ 
+  
+
+  <div id="menu_body"></div>
+
+
+ 
+<style>
+  /* Styles for the loader container */
+  .loader-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  /* Styles for the loader GIF image */
+  .loader {
+      width: 100px; /* Adjust the width and height as needed */
+      height: 100px;
+  }
+</style>
+<!-- Loader Container -->
+<div class="loader-container" id="loader-container">
+<img src="icons/loader.gif" alt="Loader" class="loader">
+</div>
+
+
+<script>
+const xhr = new XMLHttpRequest();
+const menu_body = document.getElementById('menu_body');
+const loaderContainer = document.getElementById('loader-container');
+
+// Show the loader before sending the XHR request
+loaderContainer.style.display = 'flex';
+
+xhr.onload = function() {
+  if (this.status === 200) {
+      menu_body.innerHTML = xhr.responseText;
+  } else {
+      console.warn('Did not receive 200 OK from response!');
+      // Redirect to login.html in case of an error
+      window.location.href = 'login.html';
+  }
+
+  // Hide the loader after the response is processed
+  loaderContainer.style.display = 'none';
+};
+
+xhr.onerror = function() {
+  console.error('An error occurred while sending the request!');
+  // Redirect to login.html on XHR error
+  window.location.href = 'login.html';
+
+  // Hide the loader on error
+  loaderContainer.style.display = 'none';
+};
+
+xhr.open('get', 'agriboostdmstransactions/dashboard.php');
+xhr.send();
+</script>
+
+  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- Include necessary scripts and stylesheets -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Google Charts script if needed -->
+
+<script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback function to run when the library is loaded
+        google.charts.setOnLoadCallback(function() {
+            // Delay the execution of drawChart by 1000 milliseconds (1 second)
+            setTimeout(drawChart, 1000);
+        });
+
+        var jsonData;
+
+        function drawChart() {
+            // JSON data
+            var parseValue = $('#data_processed_volume').val();
+            jsonData = JSON.parse(parseValue); // Parse the JSON string into an object
+
+            // Create a DataTable
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Week Number');
+            data.addColumn('number', 'Total Volume');
+
+            for (var i = 0; i < jsonData.length; i++) {
+                data.addRow([jsonData[i].week_num, parseFloat(jsonData[i].total_volume)]);
+            }
+
+            // Set chart options
+            var options = {
+            title: 'Total Volume by Week',
+            chartArea: {width: '80%'},
+            hAxis: {
+                title: 'Week Number'
+            },
+            vAxis: {
+                title: 'Total Volume'
+            },
+            colors: ['gold'], // Set the line color to yellow
+            series: {
+                0: { // This series refers to the first (and only) data series
+                    dataLabels: {
+                        visible: true, // Show data labels
+                        format: '#,###.##', // Format for the data labels
+                        minValue: 1000, // Set the minimum value to 1000
+                        maxValue: 10000 // Set the maximum value to 10000
+                    },
+                    curveType: 'function' // Set the line to be curved
+                }
+            },
+            legend: {
+                position: 'bottom' // Set legend position to the bottom
+            }
+        };
+
+            // Create a chart and attach it to an HTML element with the id 'chart_div'
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+        // Function to filter data based on year and month range
+       
+    </script>
+
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart by 1000 milliseconds (1 second)
+    setTimeout(drawChart01, 1000);
+  });
+  
+  function drawChart01() {
+    // JSON data
+    var parseValue01 = $('#order_commit_actual').val();
+    var jsonData01 = JSON.parse(parseValue01); // Parse the JSON string into an object
+  
+    // Filter out data points where any of the volumes is 0
+    jsonData01 = jsonData01.filter(function(item) {
+      return item.vendor_orders !== 0 && item.farmer_commitment !== 0 && item.actual_delivery !== 0;
+    });
+  
+    // Create a DataTable
+    var data01 = new google.visualization.DataTable();
+    data01.addColumn('string', 'Week Number');
+    data01.addColumn('number', 'Ordered Volume');
+    data01.addColumn('number', 'Committeed Volume');
+    data01.addColumn('number', 'Delivered Volume');
+  
+    for (var i01 = 0; i01 < jsonData01.length; i01++) {
+      data01.addRow([jsonData01[i01].week_num, parseFloat(jsonData01[i01].vendor_orders), parseFloat(jsonData01[i01].farmer_commitment), parseFloat(jsonData01[i01].actual_delivery)]);
+    }
+  
+    // Set chart options
+    var options01 = {
+      title: 'Total Volume by Week',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Week Number'
+      },
+      vAxis: {
+          title: 'Total Volume'
+      },
+      
+      series: {
+        0: { // Ordered Volume
+          dataLabels: {
+            visible: true, // Show data labels
+            format: '#,###.##',
+            minValue: 1000,
+            maxValue: 10000
+          },
+          curveType: 'function',
+          color: 'red' // Set the line color to red for Ordered Volume
+        },
+        1: { // Committed Volume
+          dataLabels: {
+            visible: true,
+            format: '#,###.##',
+            minValue: 1000,
+            maxValue: 10000
+          },
+          curveType: 'function',
+          color: 'blue' // Set the line color to blue for Committed Volume
+        },
+        2: { // Delivered Volume
+          dataLabels: {
+            visible: true,
+            format: '#,###.##',
+            minValue: 1000,
+            maxValue: 10000
+          },
+          curveType: 'function',
+          color: 'gold' // Set the line color to gold for Delivered Volume
+        }
+      },
+      legend: {
+                position: 'bottom' // Set legend position to the bottom
+            }
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div'
+    var chart01 = new google.visualization.LineChart(document.getElementById('chart_div01'));
+    chart01.draw(data01, options01);
+  }
+</script>
+
+
+
+                                            
+                                                
+<script>
+  $(document).ready(function() {
+    // Delay the DataTable initialization by 1000 milliseconds (1 second)
+    setTimeout(function() {
+      $('#myTable01').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "pageLength": 5 // Set the number of rows per page to 5
+      });
+    }, 1000);
+  });
+</script>
+
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart02 by 1000 milliseconds (1 second)
+    setTimeout(drawChart02, 1000);
+  });
+  
+  function drawChart02() {
+    // JSON data
+    var parseValue02 = $('#farmer_nps').val();
+    var jsonData02 = JSON.parse(parseValue02); // Parse the JSON string into an object
+  
+    // Create a DataTable
+    var data02 = new google.visualization.DataTable();
+    data02.addColumn('string', 'Month Name');
+    data02.addColumn('number', 'Percent');
+  
+    for (var i02 = 0; i02 < jsonData02.length; i02++) {
+      data02.addRow([jsonData02[i02].month_name, parseFloat(jsonData02[i02].percent_rating)]);
+    }
+  
+    // Set chart options for a Column Chart (vertical bars)
+    var options02 = {
+      title: 'Farmers NPS',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Month'
+      },
+      vAxis: {
+          title: 'Percent',
+          format: '#\'%\'', // Add a percent sign to axis labels
+      },
+      bars: 'vertical', // Set the chart type to vertical column chart
+      legend: { position: 'none' }, // Hide the legend
+      annotations: {
+        textStyle: {
+          fontSize: 12,
+        }
+      }
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div03'
+    var chart02 = new google.visualization.ColumnChart(document.getElementById('chart_div03'));
+    chart02.draw(data02, options02);
+  }
+</script>
+
+
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart02 by 1000 milliseconds (1 second)
+    setTimeout(drawChart04, 1000);
+  });
+  
+  function drawChart04() {
+    // JSON data
+    var parseValue04 = $('#vendor_nps').val();
+    var jsonData04 = JSON.parse(parseValue04); // Parse the JSON string into an object
+  
+    // Create a DataTable
+    var data04 = new google.visualization.DataTable();
+    data04.addColumn('string', 'Month Name');
+    data04.addColumn('number', 'Percent');
+  
+    for (var i04 = 0; i04 < jsonData04.length; i04++) {
+      data04.addRow([jsonData04[i04].month_name, parseFloat(jsonData04[i04].percent_rating)]);
+    }
+  
+    // Set chart options for a Column Chart (vertical bars)
+    var options04 = {
+      title: 'Buyers NPS',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Month'
+      },
+      vAxis: {
+          title: 'Percent',
+          format: '#\'%\'', // Add a percent sign to axis labels
+      },
+      bars: 'vertical', // Set the chart type to vertical column chart
+      legend: { position: 'none' } // Hide the legend
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div'
+    var chart04 = new google.visualization.ColumnChart(document.getElementById('chart_div04'));
+    chart04.draw(data04, options04);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart02 by 1000 milliseconds (1 second)
+    setTimeout(drawChart05, 1000);
+  });
+  
+  function drawChart05() {
+    // JSON data
+    var parseValue05 = $('#active_farmers').val();
+    var jsonData05 = JSON.parse(parseValue05); // Parse the JSON string into an object
+  
+    // Create a DataTable
+    var data05 = new google.visualization.DataTable();
+    data05.addColumn('string', 'Month');
+    data05.addColumn('number', 'Farmers');
+  
+    for (var i05 = 0; i05 < jsonData05.length; i05++) {
+      data05.addRow([jsonData05[i05].month_name, parseFloat(jsonData05[i05].unique_partner_count)]);
+    }
+  
+    // Set chart options for a Column Chart (vertical bars)
+    var options05 = {
+      title: 'Active Farmers',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Month'
+      },
+      vAxis: {
+          title: 'Farmers',
+          format: '#', // Add a percent sign to axis labels
+      },
+      bars: 'vertical', // Set the chart type to vertical column chart
+      legend: { position: 'none' } // Hide the legend
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div'
+    var chart05 = new google.visualization.ColumnChart(document.getElementById('chart_div05'));
+    chart05.draw(data05, options05);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart06 by 1000 milliseconds (1 second)
+    setTimeout(drawChart06, 1000);
+  });
+  
+  function drawChart06() {
+    // JSON data
+    var parseValue06 = $('#active_vendors').val();
+    var jsonData06 = JSON.parse(parseValue06); // Parse the JSON string into an object
+  
+    // Create a DataTable
+    var data06 = new google.visualization.DataTable();
+    data06.addColumn('string', 'Month');
+    data06.addColumn('number', 'Buyers');
+  
+    for (var i06 = 0; i06 < jsonData06.length; i06++) {
+      data06.addRow([jsonData06[i06].month_name, parseFloat(jsonData06[i06].unique_partner_count)]);
+    }
+  
+    // Set chart options for a Column Chart (vertical bars)
+    var options06 = {
+      title: 'Active Buyers',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Month'
+      },
+      vAxis: {
+          title: 'Buyers',
+          format: '#', // Add a percent sign to axis labels
+      },
+      bars: 'vertical', // Set the chart type to vertical column chart
+      legend: { position: 'none' }, // Hide the legend
+      annotations: {
+        textStyle: {
+          fontSize: 12,
+        },
+        alwaysOutside: false,
+        stem: {
+          color: 'red',
+        },
+      },
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div'
+    var chart06 = new google.visualization.ColumnChart(document.getElementById('chart_div06'));
+    chart06.draw(data06, options06);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart06 by 1000 milliseconds (1 second)
+    setTimeout(drawChart07, 1000);
+  });
+  
+  function drawChart07() {
+    // JSON data
+    var parseValue07 = $('#median_sales').val();
+    var jsonData07 = JSON.parse(parseValue07); // Parse the JSON string into an object
+  
+    // Create a DataTable
+    var data07 = new google.visualization.DataTable();
+    data07.addColumn('string', 'Month');
+    data07.addColumn('number', 'Sales');
+  
+    for (var i07 = 0; i07 < jsonData07.length; i07++) {
+      data07.addRow([jsonData07[i07].month_name, parseFloat(jsonData07[i07].median_sales)]);
+    }
+  
+    var options07 = {
+      title: 'Income',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Month'
+      },
+      vAxis: {
+          title: 'Income (Php)',
+          format: '#,###.##', // Add a percent sign to axis labels
+      },
+      bars: 'vertical', // Set the chart type to a vertical column chart
+      legend: { position: 'none' }, // Hide the legend
+      annotations: {
+        textStyle: {
+          fontSize: 12,
+        },
+        alwaysOutside: false,
+        stem: {
+          color: 'red',
+        },
+      },
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div'
+    var chart07 = new google.visualization.ColumnChart(document.getElementById('chart_div07'));
+    chart07.draw(data07, options07);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  
+  // Set a callback function to run when the library is loaded
+  google.charts.setOnLoadCallback(function() {
+    // Delay the execution of drawChart08 by 1000 milliseconds (1 second)
+    setTimeout(drawChart08, 1000);
+  });
+  
+  function drawChart08() {
+    // JSON data
+    var parseValue08 = $('#weighed_volume').val();
+    var jsonData08 = JSON.parse(parseValue08); // Parse the JSON string into an object
+  
+    // Create a DataTable
+    var data08 = new google.visualization.DataTable();
+    data08.addColumn('string', 'Month');
+    data08.addColumn('number', 'AgriHub');
+    data08.addColumn('number', 'Others');
+  
+    for (var i08 = 0; i08 < jsonData08.length; i08++) {
+      var agrihubPrice = parseFloat(jsonData08[i08].agrihub_weighted_price);
+      var otherPrice = parseFloat(jsonData08[i08].other_weighted_price);
+      
+      data08.addRow([jsonData08[i08].month_name, agrihubPrice, otherPrice]);
+    }
+  
+    // Calculate and add the "Diff" series as annotations with a percentage sign and limited to 2 decimals
+    var view = new google.visualization.DataView(data08);
+    view.setColumns([0, 1, 2, {
+      calc: function(dt, row) {
+        var agrihubPrice = dt.getValue(row, 1);
+        var otherPrice = dt.getValue(row, 2);
+        var priceDiff = ((agrihubPrice - otherPrice) / agrihubPrice) * 100;
+        return priceDiff.toFixed(2) + '%'; // Format as a percentage with 2 decimal places
+      },
+      type: 'string', // Set the type to 'string' for percentage formatting
+      role: 'annotation' // This role specifies that the calculated values will be used as annotations
+    }]);
+  
+    // Set chart options for a Column Chart (vertical bars)
+    var options08 = {
+      title: 'Volume Weighted Price By Month',
+      chartArea: {width: '80%'},
+      hAxis: {
+          title: 'Month'
+      },
+      vAxis: {
+          title: 'Price (Php)', // Add the peso sign to the axis label
+          format: '#', // Format for axis labels
+      },
+      bars: 'vertical', // Set the chart type to vertical column chart
+      legend: { position: 'none' }, // Hide the legend
+      annotations: {
+        textStyle: {
+          fontSize: 12,
+        },
+        alwaysOutside: false,
+        stem: {
+          color: 'red',
+        },
+      },
+      colors: ['blue', 'green'] // Specify the colors for the columns (blue for AgriHub, green for Others)
+    };
+  
+    // Create a chart and attach it to an HTML element with the id 'chart_div08'
+    var chart08 = new google.visualization.ColumnChart(document.getElementById('chart_div08'));
+    chart08.draw(view, options08);
+
+      // Create a custom legend for the chart
+      var legend = document.createElement('div');
+    legend.style.textAlign = 'center'; // Center the legend text
+    legend.innerHTML = '<div style="background-color: blue; display: inline-block; width: 20px; height: 20px;"></div> AgriHub ' +
+        '<div style="background-color: green; display: inline-block; width: 20px; height: 20px;"></div> Others';
+    document.getElementById('legend_div08').appendChild(legend);
+  }
+</script>
+
+<script>
+   function filterChartData() {
+            var selectedYear = $('#year_filter').val();
+            var fromMonth = parseInt($('#from_month').val());
+            var toMonth = parseInt($('#to_month').val());
+
+          //* ACTUAL VOLUME DELIVERED
+            var filteredData = jsonData.filter(function (item) {
+                var yearMatches = item.year_num === selectedYear;
+                var monthInRange = item.month_num >= fromMonth && item.month_num <= toMonth;
+                return yearMatches && monthInRange;
+            });
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Week Number');
+            data.addColumn('number', 'Total Volume');
+
+            for (var i = 0; i < filteredData.length; i++) {
+                data.addRow([filteredData[i].week_num, parseFloat(filteredData[i].total_volume)]);
+            }
+
+            // Set chart options
+            var options = {
+                title: 'Total Volume by Week',
+                chartArea: {width: '80%'},
+                hAxis: {
+                    title: 'Week Number'
+                },
+                vAxis: {
+                    title: 'Total Volume'
+                },
+                colors: ['gold'], 
+                series: {
+                    0: { 
+                        dataLabels: {
+                            visible: true, 
+                            format: '#,###.##', 
+                            minValue: 1000, 
+                            maxValue: 10000 
+                        },
+                        curveType: 'function' 
+                    }
+                },
+                legend: {
+                position: 'bottom' // Set legend position to the bottom
+            }
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            //* ORDER COMMITMENT AND ACTUAL
+            var parseValue01 = $('#order_commit_actual').val();
+            var jsonData01 = JSON.parse(parseValue01); 
+
+                var filteredData01 = jsonData01.filter(function (item01) {
+                var yearMatches01 = item01.year_num === selectedYear;
+                var monthInRange01 = item01.month_num >= fromMonth && item01.month_num <= toMonth;
+                return yearMatches01 && monthInRange01;
+            });
+           
+            var data01 = new google.visualization.DataTable();
+            data01.addColumn('string', 'Week Number');
+            data01.addColumn('number', 'Ordered Volume');
+            data01.addColumn('number', 'Committeed Volume');
+            data01.addColumn('number', 'Delivered Volume');
+  
+            for (var i01 = 0; i01 < filteredData01.length; i01++) {
+              data01.addRow([filteredData01[i01].week_num, parseFloat(filteredData01[i01].vendor_orders), parseFloat(filteredData01[i01].farmer_commitment), parseFloat(filteredData01[i01].actual_delivery)]);
+            }
+            var options01 = {
+              title: 'Total Volume by Week',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Week Number'
+              },
+              vAxis: {
+                  title: 'Total Volume'
+              },
+              
+              series: {
+                0: { 
+                  dataLabels: {
+                    visible: true, 
+                    format: '#,###.##',
+                    minValue: 1000,
+                    maxValue: 10000
+                  },
+                  curveType: 'function',
+                  color: 'red'
+                },
+                1: { 
+                  dataLabels: {
+                    visible: true,
+                    format: '#,###.##',
+                    minValue: 1000,
+                    maxValue: 10000
+                  },
+                  curveType: 'function',
+                  color: 'blue' 
+                },
+                2: { 
+                  dataLabels: {
+                    visible: true,
+                    format: '#,###.##',
+                    minValue: 1000,
+                    maxValue: 10000
+                  },
+                  curveType: 'function',
+                  color: 'gold' 
+                }
+              },   legend: {
+                position: 'bottom' // Set legend position to the bottom
+            }
+            };
+            var chart01 = new google.visualization.LineChart(document.getElementById('chart_div01'));
+            chart01.draw(data01, options01);
+
+            //* FARMERS NPS
+            var parseValue02 = $('#farmer_nps').val();
+            var jsonData02 = JSON.parse(parseValue02); 
+          
+               var filteredData02 = jsonData02.filter(function (item02) {
+                var yearMatches02 = item02.year_num === selectedYear;
+                var monthInRange02 = item02.month_num >= fromMonth && item02.month_num <= toMonth;
+                return yearMatches02 && monthInRange02;
+            });
+         
+            var data02 = new google.visualization.DataTable();
+            data02.addColumn('string', 'Month Name');
+            data02.addColumn('number', 'Percent');
+          
+            for (var i02 = 0; i02 < filteredData02.length; i02++) {
+              data02.addRow([filteredData02[i02].month_name, parseFloat(filteredData02[i02].percent_rating)]);
+            }
+          
+           
+            var options02 = {
+              title: 'Farmers NPS',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Month'
+              },
+              vAxis: {
+                  title: 'Percent',
+                  format: '#\'%\'', 
+              },
+              bars: 'vertical', 
+              legend: { position: 'none' } 
+            };
+          
+         
+            var chart02 = new google.visualization.ColumnChart(document.getElementById('chart_div03'));
+            chart02.draw(data02, options02);
+
+            //*BUYERS NPS
+            var parseValue04 = $('#vendor_nps').val();
+            var jsonData04 = JSON.parse(parseValue04); // Parse the JSON string into an object
+          
+               var filteredData04 = jsonData04.filter(function (item04) {
+                var yearMatches04 = item04.year_num === selectedYear;
+                var monthInRange04 = item04.month_num >= fromMonth && item04.month_num <= toMonth;
+                return yearMatches04 && monthInRange04;
+            });
+          
+            var data04 = new google.visualization.DataTable();
+            data04.addColumn('string', 'Month Name');
+            data04.addColumn('number', 'Percent');
+          
+            for (var i04 = 0; i04 < filteredData04.length; i04++) {
+              data04.addRow([filteredData04[i04].month_name, parseFloat(filteredData04[i04].percent_rating)]);
+            }
+          
+        
+            var options04 = {
+              title: 'Buyers NPS',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Month'
+              },
+              vAxis: {
+                  title: 'Percent',
+                  format: '#\'%\'', 
+              },
+              bars: 'vertical', 
+              legend: { position: 'none' } 
+            };
+          
+            var chart04 = new google.visualization.ColumnChart(document.getElementById('chart_div04'));
+            chart04.draw(data04, options04);
+
+            //* ACTIVE FARMERS
+            var parseValue05 = $('#active_farmers').val();
+            var jsonData05 = JSON.parse(parseValue05); 
+          
+            var filteredData05 = jsonData05.filter(function (item05) {
+                var yearMatches05 = item05.year_num === selectedYear;
+                var monthInRange05 = item05.month_num >= fromMonth && item05.month_num <= toMonth;
+                return yearMatches05 && monthInRange05;
+            });
+    
+            var data05 = new google.visualization.DataTable();
+            data05.addColumn('string', 'Month');
+            data05.addColumn('number', 'Farmers');
+          
+            for (var i05 = 0; i05 < filteredData05.length; i05++) {
+              data05.addRow([filteredData05[i05].month_name, parseFloat(filteredData05[i05].unique_partner_count)]);
+            }
+          
+            var options05 = {
+              title: 'Active Farmers',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Month'
+              },
+              vAxis: {
+                  title: 'Farmers',
+                  format: '#',
+              },
+              bars: 'vertical',
+              legend: { position: 'none' } 
+            };
+          
+            var chart05 = new google.visualization.ColumnChart(document.getElementById('chart_div05'));
+            chart05.draw(data05, options05);
+
+            //* ACTIVE VENDORS
+            var parseValue06 = $('#active_vendors').val();
+            var jsonData06 = JSON.parse(parseValue06); 
+          
+            var filteredData06 = jsonData06.filter(function (item06) {
+                var yearMatches06 = item06.year_num === selectedYear;
+                var monthInRange06 = item06.month_num >= fromMonth && item06.month_num <= toMonth;
+                return yearMatches06 && monthInRange06;
+            });
+
+            var data06 = new google.visualization.DataTable();
+            data06.addColumn('string', 'Month');
+            data06.addColumn('number', 'Buyers');
+          
+            for (var i06 = 0; i06 < filteredData06.length; i06++) {
+              data06.addRow([filteredData06[i06].month_name, parseFloat(filteredData06[i06].unique_partner_count)]);
+            }
+          
+            var options06 = {
+              title: 'Active Buyers',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Month'
+              },
+              vAxis: {
+                  title: 'Buyers',
+                  format: '#', 
+              },
+              bars: 'vertical', 
+              legend: { position: 'none' }, 
+              annotations: {
+                textStyle: {
+                  fontSize: 12,
+                },
+                alwaysOutside: false,
+                stem: {
+                  color: 'red',
+                },
+              },
+            };
+          
+            var chart06 = new google.visualization.ColumnChart(document.getElementById('chart_div06'));
+            chart06.draw(data06, options06);
+
+            //*MEDIAN SALES
+            var parseValue07 = $('#median_sales').val();
+            var jsonData07 = JSON.parse(parseValue07); 
+
+            var filteredData07 = jsonData07.filter(function (item07) {
+                var yearMatches07 = item07.year_num === selectedYear;
+                var monthInRange07 = item07.month_num >= fromMonth && item07.month_num <= toMonth;
+                return yearMatches07 && monthInRange07;
+            });
+
+            var data07 = new google.visualization.DataTable();
+            data07.addColumn('string', 'Month');
+            data07.addColumn('number', 'Sales');
+          
+            for (var i07 = 0; i07 < filteredData07.length; i07++) {
+              data07.addRow([filteredData07[i07].month_name, parseFloat(filteredData07[i07].median_sales)]);
+            }
+          
+            var options07 = {
+              title: 'Income (Php)',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Month'
+              },
+              vAxis: {
+                  title: 'Income (Php)',
+                  format: '#', 
+              },
+              bars: 'vertical', 
+              legend: { position: 'none' }, 
+              annotations: {
+                textStyle: {
+                  fontSize: 12,
+                },
+                alwaysOutside: false,
+                stem: {
+                  color: 'red',
+                },
+              },
+            };
+          
+            var chart07 = new google.visualization.ColumnChart(document.getElementById('chart_div07'));
+            chart07.draw(data07, options07);
+
+            //* VOLUME WEIGHTED PRICE
+            var parseValue08 = $('#weighed_volume').val();
+            var jsonData08 = JSON.parse(parseValue08); 
+          
+         
+            var filteredData08 = jsonData08.filter(function (item08) {
+                var yearMatches08 = item08.year_num === selectedYear;
+                var monthInRange08 = item08.month_num >= fromMonth && item08.month_num <= toMonth;
+                return yearMatches08 && monthInRange08;
+            });
+
+            var data08 = new google.visualization.DataTable();
+            data08.addColumn('string', 'Month');
+            data08.addColumn('number', 'AgriHub');
+            data08.addColumn('number', 'Others');
+          
+            for (var i08 = 0; i08 < filteredData08.length; i08++) {
+              var agrihubPrice = parseFloat(filteredData08[i08].agrihub_weighted_price);
+              var otherPrice = parseFloat(filteredData08[i08].other_weighted_price);
+              
+              data08.addRow([filteredData08[i08].month_name, agrihubPrice, otherPrice]);
+            }
+          
+            // Calculate and add the "Diff" series as annotations with a percentage sign and limited to 2 decimals
+            var view = new google.visualization.DataView(data08);
+            view.setColumns([0, 1, 2, {
+              calc: function(dt, row) {
+                var agrihubPrice = dt.getValue(row, 1);
+                var otherPrice = dt.getValue(row, 2);
+                var priceDiff = ((agrihubPrice - otherPrice) / agrihubPrice) * 100;
+                return priceDiff.toFixed(2) + '%'; // Format as a percentage with 2 decimal places
+              },
+              type: 'string', // Set the type to 'string' for percentage formatting
+              role: 'annotation' // This role specifies that the calculated values will be used as annotations
+            }]);
+          
+            // Set chart options for a Column Chart (vertical bars)
+            var options08 = {
+              title: 'Volume Weighted Price By Month',
+              chartArea: {width: '80%'},
+              hAxis: {
+                  title: 'Month'
+              },
+              vAxis: {
+                  title: 'Price (₱)', // Add the peso sign to the axis label
+                  format: '#', // Format for axis labels
+              },
+              bars: 'vertical', // Set the chart type to vertical column chart
+              legend: { position: 'none' }, // Hide the legend
+              annotations: {
+                textStyle: {
+                  fontSize: 12,
+                },
+                alwaysOutside: false,
+                stem: {
+                  color: 'red',
+                },
+              },
+              colors: ['blue', 'green'] // Specify the colors for the columns (blue for AgriHub, green for Others)
+            };
+          
+            // Create a chart and attach it to an HTML element with the id 'chart_div08'
+            var chart08 = new google.visualization.ColumnChart(document.getElementById('chart_div08'));
+            chart08.draw(view, options08);
+            
+
+            $.ajax({
+            type: 'POST',
+            url: 'agriboostdmstransactions/dashboardfetchajax.php', // Replace with the actual server-side script to fetch data
+            data: {
+                selectedYear: selectedYear,
+                fromMonth: fromMonth,
+                toMonth: toMonth
+            },
+            success: function (response) {
+                // Update the total processed volume display with the new data
+                $('#dashboardfetchajax').html(response)
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+        }
+</script>
+
+
+<!-- Include this JavaScript in your HTML file -->
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="src/index.js"></script>
+
+
+<!-- Datatable init js -->
+<script src="function/datatable/assets/js/pages/datatables.init.js"></script>
+    <script src="function/dashed/assets/libs/jquery/jquery.min.js"></script>
+    <script src="function/dashed/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="function/dashed/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="function/dashed/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="function/dashed/assets/libs/node-waves/waves.min.js"></script>
+    <script src="function/dashed/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="function/dashed/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+    <!-- apexcharts -->
+    <script src="function/dashed/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <script src="function/dashed/assets/js/pages/dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="function/dashed/assets/js/app.js"></script>
+
+    
+<!-- jquery step -->
+<script src="function/wizard/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+
+<!-- form wizard init -->
+<script src="function/wizard/assets/js/pages/form-wizard.init.js"></script>
+
+
+<script src="function/datatable/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="function/datatable/assets/libs/jszip/jszip.min.js"></script>
+<script src="function/datatable/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="function/datatable/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="function/datatable/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="function/datatable/assets/js/pages/datatables.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
+
+
+
+<!-- parsleyjs -->
+<script src="function/formvalidation/assets/libs/parsleyjs/parsley.min.js"></script>
+
+<script src="function/formvalidation/assets/js/pages/form-validation.init.js"></script>
+
+
+</body>
+
+</html>

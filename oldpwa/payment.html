@@ -1,0 +1,195 @@
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Payment || ClanApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="users/clan.jpg">
+
+    <!-- Bootstrap Css -->
+    <link href="function/dashboard/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="function/dashboard/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="function/dashboard/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+        <!-- DataTables -->
+        <link href="function/datatable/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="function/datatable/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+        
+    <!-- Responsive datatable examples -->
+    <link href="function/datatable/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
+    <script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"> </script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="menu_body"></div>
+    <script>
+        const xhr = new XMLHttpRequest();
+        const menu_body = document.getElementById('menu_body');
+    
+        xhr.onload = function() {
+            if (this.status === 200) {
+                menu_body.innerHTML = xhr.responseText;
+            } else {
+                console.warn('Did not receive 200n OK from response!')
+            }
+        };
+    
+        xhr.open('get', 'transactionsprocess/payment.php');
+        xhr.send();
+    </script>
+
+
+<script>
+    function addcomm(){
+         
+           
+           var userid= $('#userid').val();
+           var username= $('#username').val();
+           var userpaymentstatus= $('#userpaymentstatus').val();
+           var userdate= $('#userdate').val();
+           var userpaid= $('#userpaid').val();
+           var usertransactiondate= $('#usertransactiondate').val();
+       
+
+                   $.ajax({
+                           url:"transactionsprocess/dashboardinsert.php",
+                           method:"POST",
+                           data:{userid:userid,username:username,userpaymentstatus:userpaymentstatus,userdate:userdate,userpaid:userpaid,usertransactiondate:usertransactiondate},
+                           success:function(data,status){
+                           
+                               Swal.fire({
+                               title: 'Success',
+                               text: 'Paid successfully!',
+                               icon: 'success',
+                               timer: 2000
+                               }).then(() => {
+                                   window.location.reload();
+                               }); 
+                               $('#myModal').modal('hide');                                               
+                               window.location.reload();
+                               
+                           }
+                       });
+       }
+</script>
+
+<script>
+    function updatemecollect(collect){
+        if(confirm("Are you sure you want to update this data to Collected?")){
+        window.location.href='transactionsprocess/paymentupdate.php?' +collect+ '';
+        
+        }
+        }
+</script> 
+
+<script>
+    function updatemeapprove(approve){
+        if(confirm("Are you sure you want to update this data to Approve?")){
+        window.location.href='transactionsprocess/paymentupdate.php?' +approve+ '';
+        
+        }
+        }
+</script> 
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+
+<!-- JAVASCRIPT -->
+<!--<script src="function/dashboard/assets/libs/jquery/jquery.min.js"></script>-->
+<script src="function/dashboard/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="function/dashboard/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="function/dashboard/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="function/dashboard/assets/libs/node-waves/waves.min.js"></script>
+<script src="function/dashboard/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="function/dashboard/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+<!-- apexcharts -->
+<script src="function/dashboard/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+<script src="function/dashboard/assets/js/pages/dashboard.init.js"></script>
+
+<!-- jquery step -->
+<script src="function/wizard/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+
+<!-- form wizard init -->
+<script src="function/wizard/assets/js/pages/form-wizard.init.js"></script>
+
+
+<script src="function/datatable/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="function/datatable/assets/libs/jszip/jszip.min.js"></script>
+<script src="function/datatable/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="function/datatable/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="function/datatable/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="function/datatable/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="function/datatable/assets/js/pages/datatables.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
+
+
+<!-- Init js -->
+<script src="function/rwdtable/assets/js/pages/table-responsive.init.js"></script>
+
+
+<!-- init js -->
+<script src="function/advanceplug/assets/js/pages/form-advanced.init.js"></script>
+
+<script src="function/advanceplug/assets/libs/select2/js/select2.min.js"></script>
+
+
+<!-- parsleyjs -->
+<script src="function/formvalidation/assets/libs/parsleyjs/parsley.min.js"></script>
+
+<script src="function/formvalidation/assets/js/pages/form-validation.init.js"></script>
+
+
+<!-- App js -->
+<script src="function/dashboard/assets/js/app.js"></script>
+
+</html>
+
+
+
+
+
+
