@@ -135,7 +135,7 @@ $date_f = date('Y-m-d');
                                                     $sumtarvol = $result['SUM(volume)'];                                                               
                                                 ?>
                                         <h4 class="mb-1 mt-1"><span data-plugin="counterup"><?php echo number_format($sumtarvol, 2);?></span> kg</h4>
-                                        <p class="text-muted mb-0">Targeted Volumes</p>
+                                        <p class="text-muted mb-0">Target Volumes</p>
                                     </div>
                                     <!--<p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i class="mdi mdi-arrow-down-bold me-1"></i>6.24%</span> since last week
                                     </p>-->
