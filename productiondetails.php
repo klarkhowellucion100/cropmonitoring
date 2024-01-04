@@ -77,14 +77,38 @@ $finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                                             </thead>
                                             <tbody id="table-coef-query">
                                                 <tr id="row-1">
-                                                    <td><input type="number" name="coefficients[]" placeholder="Please Input Coefficient">
+                                                    <td>
+                                                        <input type="number" name="coefficients[]" placeholder="Please Input Coefficient">
                                                     </td>
-                                                    <td><input type="text" name="randomCodes[]"
-                                                            value='<?php echo $finalcode; ?>' readonly></td>
+                                                    <td>
+                                                        <input type="text" name="randomCodes[]" value='<?php echo $finalcode; ?>' readonly>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="date_saved[]" value='<?php echo $date_f; ?>' readonly>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="dt_joined">Start Date</label>
+                                                                <input type="date" required class="form-control" id="start_date" name="start_date">      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="dt_joined">End Date</label>
+                                                                <input type="date" required class="form-control" id="end_date" name="end_date">      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+                                                </div>
 
                                     <button type="button" class="btn btn-success add-btn" id="add-btn">Add +</button>
                                     <button type="button" class="btn btn-primary submit-btn" id="submit-btn">Save</button>
@@ -93,8 +117,8 @@ $finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                             </div>
                             <!-- end card-->
                         </div>
-                    </div>
 
+                    
                         <script>
                             var commonRandomCode = <?php echo json_encode($finalcode); ?>;
 

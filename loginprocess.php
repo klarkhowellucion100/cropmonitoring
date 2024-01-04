@@ -4,10 +4,7 @@ include 'db.inc.php';
 
 // IF
 if(isset($_POST["action"])){
-  if($_POST["action"] == "register"){
-    register();
-  }
-  else if($_POST["action"] == "login"){
+  if($_POST["action"] == "login"){
     login();
   }
 }
