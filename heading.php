@@ -240,13 +240,26 @@ $result = mysqli_fetch_assoc($data);
                             </li>
 
                         <li class="menu-title">Data Entry</li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="uil-home-alt"></i>
+                                    <span>Commodity</span>
+                                </a>
+                                    <ul class="sub-menu" aria-expanded="true">                                        
+                                        <?php if($usertype=="Admin"){?> 
+                                        <li>
+                                            <a href="commoditydetails.php">Commodity Details</a>                                           
+                                        </li>
+
+                                        <li>
+                                            <a href="productiondetails.php">Production Details</a>                                            
+                                        </li>
+                                        <?php } ?>                                          
+                                    </ul>
+                            </li>
+
                         <?php if($usertype=="Admin"){?>
-                        <li>
-                            <a style='cursor:pointer;' href="commodity.php">
-                                <i class="uil-file-alt"></i>
-                                <span>Commodity</span>
-                            </a>
-                        </li>
                     
                         <li>
                             <a style='cursor:pointer;' href="farmerregistration.php">
