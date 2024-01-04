@@ -38,7 +38,7 @@ function createRandomPassword() {
     }
     return $pass;
 }
-$finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
+$finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
 
 ?>
    <!-- start page title -->
@@ -84,28 +84,53 @@ $finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                                                         <input type="text" name="randomCodes[]" value='<?php echo $finalcode; ?>' readonly>
                                                     </td>
                                                     <td>
-                                                        <input type="date" name="date_saved[]" value='<?php echo $date_f; ?>' readonly>
+                                                        <input type="date" name="date_saved[]" id='date_saved' readonly>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="dh[]" id="dh" readonly>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="dr[]" id="dr" readonly>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
 
+                                               
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <div class="commo">
-                                                                <label for="dt_joined">Start Date</label>
-                                                                <input type="date" required class="form-control" id="start_date" name="start_date">      
+                                                                <label for="dbh">Distance Over Hill</label>
+                                                                <input type="number" required class="form-control" id="dbh" oninput="updateDH()">      
                                                             </div>                                        
                                                         </div>
                                                     </div> 
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <div class="commo">
-                                                                <label for="dt_joined">End Date</label>
-                                                                <input type="date" required class="form-control" id="end_date" name="end_date">      
+                                                                <label for="dbr">Distance Over Row</label>
+                                                                <input type="number" required class="form-control" id="dbr" oninput="updateDR()">      
                                                             </div>                                        
+                                                        </div>
+                                                    </div> 
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="dbh">Date Saved</label>
+                                                                <input type="date" required class="form-control" id="dts" oninput="updateDTS()">      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                           
+                                                                                          
                                                         </div>
                                                     </div> 
                                                 </div>
@@ -120,8 +145,6 @@ $finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
 
                     
                         <script>
-                            var commonRandomCode = <?php echo json_encode($finalcode); ?>;
-
                             document.getElementById("table-coef-query").addEventListener("click", function (event) {
                                 if (event.target.classList.contains("delete-btn")) {
                                     var rowId = event.target.closest("tr").id;
@@ -139,7 +162,12 @@ $finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                                 // Fetch the random code from the original row
                                 var originalRandomCode = document.querySelector('input[name="randomCodes[]"]').value;
 
-                                clonedRow.querySelector('input[name="coefficients[]"]').value = '';
+                                // Update all cloned td elements
+                                clonedRow.querySelectorAll('td input').forEach(function (input) {
+                                    input.value = '';
+                                });
+
+                                // Update the random code for the cloned row
                                 clonedRow.querySelector('input[name="randomCodes[]"]').value = originalRandomCode;
 
                                 var deleteButton = document.createElement("button");
@@ -158,7 +186,33 @@ $finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                                 var rowToDelete = document.getElementById(rowId);
                                 rowToDelete.parentNode.removeChild(rowToDelete);
                             }
+
+                            function updateDH() {
+                                var dbhValue = document.getElementById("dbh").value;
+                                document.querySelectorAll('input[name="dh[]"]').forEach(function (input) {
+                                    input.value = dbhValue;
+                                });
+                            }
+
+                            function updateDR() {
+                                var dbrValue = document.getElementById("dbr").value;
+                                document.querySelectorAll('input[name="dr[]"]').forEach(function (input) {
+                                    input.value = dbrValue;
+                                });
+                            }
+
+                            function updateDTS() {
+                                var dtsValue = document.getElementById("dts").value;
+                                document.querySelectorAll('input[name="date_saved[]"]').forEach(function (input) {
+                                    input.value = dtsValue;
+                                });
+                            }
+
+                            // Attach event listeners to the input elements
+                            document.getElementById("dbh").addEventListener("input", updateDH);
+                            document.getElementById("dbr").addEventListener("input", updateDR);
                         </script>
+
 
                         <script>
                             $(document).ready(function() {
