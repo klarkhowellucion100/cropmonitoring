@@ -38,7 +38,8 @@ function createRandomPassword() {
     }
     return $pass;
 }
-$finalcode='CM'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
+$finalcode='PC'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
+
 ?>
    <!-- start page title -->
     <div class="row">
@@ -66,22 +67,24 @@ $finalcode='CM'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                                     <h4 class="card-title">Add Commodity Details</h4>
                                     <h4 style="color: royalblue; font-size:15px; margin-top: 20px;">Commodity Details</h4>
 
-                                    <table class="table table-striped table-bordered dt-responsive nowrap"
-                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>Production Coefficient</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="table-coef-query">
-                                            <tr id="row-1">
-                                                <td><input type="number" name="coefficients[]" placeholder="Please Input Coefficient">
-                                                </td>
-                                                <td><input type="text" name="randomCodes[]"
-                                                        value='<?php echo generateRandomCode(); ?>' readonly></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered dt-responsive nowrap"
+                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Production Coefficient</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="table-coef-query">
+                                                <tr id="row-1">
+                                                    <td><input type="number" name="coefficients[]" placeholder="Please Input Coefficient">
+                                                    </td>
+                                                    <td><input type="text" name="randomCodes[]"
+                                                            value='<?php echo $finalcode; ?>' readonly></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                     <button type="button" class="btn btn-success add-btn" id="add-btn">Add +</button>
                                     <button type="button" class="btn btn-primary submit-btn" id="submit-btn">Save</button>
@@ -92,18 +95,8 @@ $finalcode='CM'.date('Y').''.date('d').''.createRandomPassword().''.date('m');
                         </div>
                     </div>
 
-                    <?php
-                        function generateRandomCode()
-                        {
-                            return rand(100, 999); // Adjust the range as needed
-                        }
-
-                        // Generate a single random code for all rows
-                        $commonRandomCode = generateRandomCode();
-                        ?>
-
                         <script>
-                            var commonRandomCode = <?php echo json_encode($commonRandomCode); ?>;
+                            var commonRandomCode = <?php echo json_encode($finalcode); ?>;
 
                             document.getElementById("table-coef-query").addEventListener("click", function (event) {
                                 if (event.target.classList.contains("delete-btn")) {
