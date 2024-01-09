@@ -60,6 +60,7 @@ $result = mysqli_fetch_assoc($data);
         <!-- DataTables -->
         <link href="function/datatable/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="function/datatable/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="function/select2/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 
         
     <!-- Responsive datatable examples -->
@@ -70,6 +71,8 @@ $result = mysqli_fetch_assoc($data);
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 <script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"> </script>
 <link rel="apple-touch-icon" href="icons/logo1.png">

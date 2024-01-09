@@ -68,58 +68,128 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                     <h4 style="color: royalblue; font-size:15px; margin-top: 20px;">Commodity Details</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered dt-responsive nowrap"
+                                        <table id="table_form2" class="table table-striped table-bordered dt-responsive nowrap"
                                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th>Production Coefficient</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="table-coef-query">
                                                 <tr id="row-1">
                                                     <td>
-                                                        <input type="number" name="coefficients[]" placeholder="Please Input Coefficient">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <div class="commo">
+                                                                    <input type="number" class="form-control" name="coef[]" id='coef' placeholder="Please Input Coefficient">
+                                                                </div>                                        
+                                                            </div>
+                                                        </div> 
                                                     </td>
-                                                    <td>
-                                                        <input type="text" name="randomCodes[]" value='<?php echo $finalcode; ?>' readonly>
+                                                    <td style="display:none;">
+                                                        <input type="text" name="code[]" id='code' value='<?php echo $finalcode; ?>' readonly>
                                                     </td>
-                                                    <td>
-                                                        <input type="date" name="date_saved[]" id='date_saved' readonly>
+                                                    <td style="display:none;">
+                                                        <input type="date" name="date_created[]" id='date_created' readonly>
                                                     </td>
-                                                    <td>
+                                                    <td style="display:none;">
                                                         <input type="number" name="dh[]" id="dh" readonly>
                                                     </td>
-                                                    <td>
+                                                    <td style="display:none;">
                                                         <input type="number" name="dr[]" id="dr" readonly>
+                                                    </td>
+
+                                                    <td style="display:none;">
+                                                        <input type="number" name="mat_days[]" id="mat_days" readonly>
+                                                    </td>
+
+                                                    <td style="display:none;">
+                                                        <input type="text" name="comm[]" id="comm" readonly>
+                                                    </td>
+
+                                                    <td style="display:none;">
+                                                        <input type="text" name="days_in_week[]" id="days_in_week" readonly>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
 
-                                               
-
                                                 <div class="row">
+
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <div class="commo">
-                                                                <label for="dbh">Distance Over Hill</label>
-                                                                <input type="number" required class="form-control" id="dbh" oninput="updateDH()">      
+                                                                <label for="comm_name">Commodity</label>
+                                                                <select id="comm_name" class="form-select comm_name" name="comm_name" onchange="updateCMN()">
+                                                                  <option value="">Select Commodity *</option>
+                                                                        <?php  
+                                                                            $sql = "SELECT * FROM comm_posnew GROUP BY comm";
+                                                                            $query = mysqli_query($conn, $sql);
+                                                                        ?>
+                                                                        <?php foreach($query as $q){ ?>  
+                                                                            <option value="<?php echo $q ['comm'];?>"><?php echo $q ['comm'];?></option>
+                                                                        <?php } ?>
+                                                            </select>  
                                                             </div>                                        
                                                         </div>
                                                     </div> 
+
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <div class="commo">
-                                                                <label for="dbr">Distance Over Row</label>
-                                                                <input type="number" required class="form-control" id="dbr" oninput="updateDR()">      
+                                                                <label for="dbr">Maturity Days</label>
+                                                                <input type="number" required class="form-control" placeholder="Please Enter Maturity Days   *" id="mtd" oninput="updateMTD()">      
                                                             </div>                                        
                                                         </div>
                                                     </div> 
+                                                    
+                                                    
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
+
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="dbh">Distance Over Hill</label>
+                                                                <input type="number" required class="form-control" placeholder="Please Enter DH *" id="dbh" oninput="updateDH()">      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="dbr">Distance Over Row</label>
+                                                                <input type="number" required class="form-control" placeholder="Please Enter DR *" id="dbr" oninput="updateDR()">      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                            <label for="freq_del">Frequency</label>                                                       
+                                                            <select name="selected_days[]" id="selected_days" style="width:100%;" class="select2 form-select select2-multiple" multiple="multiple" data-placeholder="Choose ..." onchange="updateFQY()">
+
+                                                                <?php
+                                                                $allowed_days = [7 => 'Sunday', 1 => 'Monday', 2 => 'Tuesday', 3 => 'Wednesday', 4 => 'Thursday', 5 => 'Friday', 6 => 'Saturday'];
+                                                                foreach ($allowed_days as $day_number => $day_name) {
+                                                                    echo "<option value='$day_number'>$day_name</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+
+                                                </div>
+
+                                                <div class="row">
+                                                    
+                                                    <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <div class="commo">
                                                                 <label for="dbh">Date Saved</label>
@@ -127,12 +197,7 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                             </div>                                        
                                                         </div>
                                                     </div> 
-                                                    <div class="col-md-6">
-                                                        <div class="mb-3">
-                                                           
-                                                                                          
-                                                        </div>
-                                                    </div> 
+                                                    
                                                 </div>
 
                                     <button type="button" class="btn btn-success add-btn" id="add-btn">Add +</button>
@@ -142,6 +207,72 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                             </div>
                             <!-- end card-->
                         </div>
+                     
+                    
+                        <script>
+                                        $(document).ready(function () {
+                                            $("#submit-btn").click(function (e) {
+                                                e.preventDefault();
+
+                                                // Create an array to store data for each row
+                                                var dataArray = [];
+
+                                                // Loop through each row in the table
+                                                $('#table_form2 tbody tr').each(function () {
+                                                    var row = $(this);
+                                                    var rowData = {
+                                                        coef: row.find('#coef').val(),
+                                                        code: row.find('#code').val(),
+                                                        date_created: row.find('#date_created').val(),
+                                                        dh: row.find('#dh').val(),
+                                                        dr: row.find('#dr').val(),
+                                                        mat_days: row.find('#mat_days').val(),
+                                                        comm: row.find('#comm').val(),
+                                                        days_in_week: row.find('#days_in_week').val(),
+                                                    };
+
+                                                    // Push the rowData to the dataArray
+                                                    dataArray.push(rowData);
+                                                });
+
+                                                //alert(JSON.stringify(dataArray, null, 2));
+
+                                                // Send the dataArray to the PHP script
+                                                $.ajax({
+                                                    url: "productiondetailsprocess.php",
+                                                    method: "POST",
+                                                    data: { dataArray: dataArray },
+                                                    success: function (data) {
+                                                        var response = JSON.parse(data);
+
+                                                        if (response.status === 'success') {
+                                                            Swal.fire({
+                                                                title: 'Success',
+                                                                text: response.message,
+                                                                icon: 'success',
+                                                                timer: 2000
+                                                            }).then(() => {
+                                                                location.reload();
+                                                            });
+                                                        } else {
+                                                            Swal.fire({
+                                                                title: 'Error',
+                                                                text: response.message,
+                                                                icon: 'error'
+                                                            });
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        Swal.fire({
+                                                            title: 'Error',
+                                                            text: 'An error occurred during the request.',
+                                                            icon: 'error'
+                                                        });
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
 
                     
                         <script>
@@ -160,7 +291,7 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                 clonedRow.id = newRowId;
 
                                 // Fetch the random code from the original row
-                                var originalRandomCode = document.querySelector('input[name="randomCodes[]"]').value;
+                                var originalRandomCode = document.querySelector('input[name="code[]"]').value;
 
                                 // Update all cloned td elements
                                 clonedRow.querySelectorAll('td input').forEach(function (input) {
@@ -168,7 +299,7 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                 });
 
                                 // Update the random code for the cloned row
-                                clonedRow.querySelector('input[name="randomCodes[]"]').value = originalRandomCode;
+                                clonedRow.querySelector('input[name="code[]"]').value = originalRandomCode;
 
                                 var deleteButton = document.createElement("button");
                                 deleteButton.type = "button";
@@ -203,8 +334,36 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
 
                             function updateDTS() {
                                 var dtsValue = document.getElementById("dts").value;
-                                document.querySelectorAll('input[name="date_saved[]"]').forEach(function (input) {
+                                document.querySelectorAll('input[name="date_created[]"]').forEach(function(input) {
                                     input.value = dtsValue;
+                                });
+                            }
+
+                            function updateMTD() {
+                                var mtdValue = document.getElementById("mtd").value;
+                                document.querySelectorAll('input[name="mat_days[]"]').forEach(function (input) {
+                                    input.value = mtdValue;
+                                });
+                            }
+
+                            function updateCMN() {
+                                var cmnValue = document.getElementById("comm_name").value;
+                                document.querySelectorAll('input[name="comm[]"]').forEach(function (input) {
+                                    input.value = cmnValue;
+                                });
+                            }
+
+                             function updateFQY() {
+                                var selectedDays = [];
+                                var selectedOptions = document.querySelectorAll('#selected_days option:checked');
+                                
+                                selectedOptions.forEach(function(option) {
+                                    selectedDays.push(option.value);
+                                });
+
+                                var selDays = document.getElementById("days_in_week").value = selectedDays.join(', ');
+                                document.querySelectorAll('input[name="days_in_week[]"]').forEach(function (input) {
+                                    input.value = selDays;
                                 });
                             }
 
@@ -213,101 +372,9 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                             document.getElementById("dbr").addEventListener("input", updateDR);
                         </script>
 
-
-                        <script>
-                            $(document).ready(function() {
-                            $("#submit-btn").click(function(e) {
-                                e.preventDefault();
-                                var code= $('#code').val();
-                                var comm= $('#comm').val();
-                                var comm_type= $('#comm_type').val();
-                                var comm_prod= $('#comm_prod').val();
-                                var comm_fgpm= $('#comm_fgpm').val();
-                                var comm_fgp= $('#comm_fgp').val();
-                                var comm_wspm= $('#comm_wspm').val();
-                                var comm_wsppc= $('#comm_wsppc').val();
-                                var comm_wsp= $('#comm_wsp').val();
-                                var comm_srpm= $('#comm_srpm').val();
-                                var comm_unit= $('#comm_unit').val();
-                                var comm_srp= $('#comm_srp').val();
-                                var comm_diffp= $('#comm_diffp').val();
-
-                                // Send the dataArray to the PHP script
-                                $.ajax({
-                                        url:"commodityprocess.php",
-                                        method:"POST",
-                                        data:{code:code,comm:comm,comm_type:comm_type,comm_prod:comm_prod,comm_fgpm:comm_fgpm,comm_fgp:comm_fgp,comm_wspm:comm_wspm,comm_wsppc:comm_wsppc,comm_wsp:comm_wsp,comm_srpm:comm_srpm,comm_unit:comm_unit,comm_srp:comm_srp,comm_diffp:comm_diffp},
-                                        success:function(data,status){
-                                                                            
-                                            
-                                            Swal.fire({
-                                                title: 'Success',
-                                                text: 'Saved successfully!',
-                                                icon: 'success',
-                                                timer: 2000
-                                                }).then(() => {
-                                                location.reload();
-                                                }); 
-                                                
-                                        }
-                                        });
-                            });
-                            });                                                    
-                        </script>
-
-                        <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+                  
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                     
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="card-body">
-                                
-                                    <h4 class="card-title">Commodities</h4>
-                                    <div class='open_data'>
-                                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Commodity</th>
-                                                        <th>Type</th>
-                                                        <th>Class</th>
-                                                        <th>Farmgate</th>
-                                                        <th>Wholesale</th>
-                                                        <th>Delete</th>                   
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                        include 'db.inc.php';
-                                                        $query1 = mysqli_query($conn,"SELECT * FROM comm_posnew ORDER BY comm ASC");
-                                                        while($result1 = mysqli_fetch_array($query1)): ?>
-                                                    <tr>
-                                                        <td><?php echo $result1 ['comm']; ?></td>
-                                                        <td><?php echo $result1 ['comm_type']; ?></td>
-                                                        <td>Class A</td>
-                                                        <td><?php echo $result1 ['comm_fgp']; ?></td>
-                                                        <td><?php echo $result1 ['comm_wsp']; ?></td>
-                                                        <td> <a onClick="deleteme(<?php echo $result1['id'];?>)" class="btn  btn-raised btn-danger waves-effect">Delete</a></td>
-                                                        <script>
-                                                            function deleteme(delid){
-                                                                if(confirm("Are you sure you want to delete this data?")){
-                                                                window.location.href='commodityprocess.php?delete=' +delid+ '';
-                                                                return true;
-                                                                }
-                                                                }
-                                                        </script>                                                                                 
-                                                    </tr>
-                                                        <?php endwhile; ?>
-                                                </tbody>                                    
-                                            </table>
-                                        </div>
-                                    </div>
-                                <!-- end card-body-->
-                                </div>
-                            <!-- end card-->
-                            </div>
-                        <!-- end col-->
-                        </div>
+                        
 
 
 <?php include_once 'footer.php';?>

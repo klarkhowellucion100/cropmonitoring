@@ -142,6 +142,7 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="function/select2/assets/libs/select2/js/select2.min.js"></script>
     <!-- JAVASCRIPT -->
     <!--<script src="function/dashboard/assets/libs/jquery/jquery.min.js"></script>-->
     <script src="function/dashboard/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
