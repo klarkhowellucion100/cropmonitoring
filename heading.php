@@ -225,7 +225,7 @@ $result = mysqli_fetch_assoc($data);
                                 </a>
                                     <ul class="sub-menu" aria-expanded="true">
                                         
-                                        <li><a href="dashboard.php">Analytics</a>
+                                        <li><a href="dashboardcommitment.php">Commitment</a>
                                         
                                         </li>
 
@@ -248,7 +248,7 @@ $result = mysqli_fetch_assoc($data);
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="uil-home-alt"></i>
+                                    <i class="uil-file-alt"></i>
                                     <span>Monitoring</span>
                                 </a>
                                     <ul class="sub-menu" aria-expanded="true">                                        
@@ -258,7 +258,7 @@ $result = mysqli_fetch_assoc($data);
                                         </li>
 
                                         <li>
-                                            <a href="productiondetails.php">Schedule</a>                                            
+                                            <a href="#">Field Monitoring</a>                                            
                                         </li>
                                         <?php } ?>                                          
                                     </ul>
@@ -266,7 +266,7 @@ $result = mysqli_fetch_assoc($data);
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="uil-home-alt"></i>
+                                    <i class="uil-file-alt"></i>
                                     <span>Commodity</span>
                                 </a>
                                     <ul class="sub-menu" aria-expanded="true">                                        

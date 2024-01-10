@@ -33,10 +33,10 @@ if (isset($_POST['dataArray'])) {
         // ... (repeat for other variables)
 
         // Check if $comm_priv is not empty
-        $coef = mysqli_real_escape_string($conn, $data['hills']);
+        $hills = mysqli_real_escape_string($conn, $data['hills']);
         if ($hills !== "") {
             // Your database insertion query, adjust based on your actual table structure
-        $insertQuery = "INSERT INTO production_cms (code,comm,`name`,coef,hills,frequency,vol_del_day,vol_del_week,date_trans,mat_days,date_harvest,week_harvest,date_range,`location`,area,status_comm,date_sown,date_created) 
+        $insertQuery = "INSERT INTO production_cms (code,comm,name,coef,hills,frequency,vol_del_day,vol_del_week,date_trans,mat_days,date_harvest,week_harvest,date_range,location,area,status_comm,date_sown,date_created) 
         VALUES ('$code','$comm','$name','$coef','$hills','$frequency','$vol_del_day','$vol_del_week','$date_trans','$mat_days','$date_harvest','$week_harvest','$date_range','$location','$area','$status_comm','$date_sown','$date_created')";
         
             // Perform the insertion

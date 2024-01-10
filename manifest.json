@@ -1,6 +1,6 @@
 {
-    "name": "AgriBOOSTDMS",
-    "short_name": "AgriBOOSTDMS",
+    "name": "CropMonitoring",
+    "short_name": "ProductionMonitoring",
     "start_url": ".",
     "display": "standalone",
     "background_color": "royalblue",
