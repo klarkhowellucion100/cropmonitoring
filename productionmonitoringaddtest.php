@@ -64,73 +64,52 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
-                                    <h4 class="card-title">Add Commodity Details</h4>
-                                    <h4 style="color: royalblue; font-size:15px; margin-top: 20px;">Commodity Details</h4>
+                                    <h4 class="card-title">Add Production Schedule</h4>
+                                    <h4 style="color: royalblue; font-size:15px; margin-top: 20px;">Production Schedule</h4>
+
+                                    
 
                                     <div class="table-responsive">
-                                        <table id="table_form2" class="table table-striped table-bordered dt-responsive nowrap"
-                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Production Coefficient</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="table-coef-query">
-                                                <tr id="row-1">
-                                                    <td>
-                                                        <div class="col-md-12">
-                                                            <div class="mb-3">
-                                                                <div class="commo">
-                                                                    <input type="number" class="form-control" name="coef[]" id='coef' placeholder="Please Input Coefficient">
-                                                                </div>                                        
-                                                            </div>
-                                                        </div> 
-                                                    </td>
-                                                    <td style="display:none;">
-                                                        <input type="text" name="code[]" id='code' value='<?php echo $finalcode; ?>' readonly>
-                                                    </td>
-                                                    <td style="display:none;">
-                                                        <input type="date" name="date_created[]" id='date_created' readonly>
-                                                    </td>
-                                                    <td style="display:none;">
-                                                        <input type="number" name="dh[]" id="dh" readonly>
-                                                    </td>
-                                                    <td style="display:none;">
-                                                        <input type="number" name="dr[]" id="dr" readonly>
-                                                    </td>
-
-                                                    <td style="display:none;">
-                                                        <input type="number" name="mat_days[]" id="mat_days" readonly>
-                                                    </td>
-
-                                                    <td style="display:none;">
-                                                        <input type="text" name="comm[]" id="comm" readonly>
-                                                    </td>
-
-                                                    <td style="display:none;">
-                                                        <input type="text" name="days_in_week[]" id="days_in_week" readonly>
-                                                    </td>
-
-                                                    <td style="display:none;">
-                                                        <input type="number" name="frequency[]" id="frequency" readonly>
-                                                    </td>
-                                                    
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        
                                     </div>
 
                                                 <div class="row">
 
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3" style="display:none;">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="farmer_name">Farmer Name</label>
+                                                                <select id="farmer_name" class="form-select comm_name" name="farmer_name">
+                                                                  <option value="">Select Farmer *</option>
+                                                                        <?php  
+                                                                            $sql = "SELECT * FROM registrationhubpos WHERE type='Farmer' GROUP BY fname";
+                                                                            $query = mysqli_query($conn, $sql);
+                                                                        ?>
+                                                                        <?php foreach($query as $q){ ?>  
+                                                                            <option value="<?php echo $q ['fname'];?>"><?php echo $q ['fname'];?></option>
+                                                                        <?php } ?>
+                                                            </select>  
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="col-md-3" style="display:none;">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="dbr">Date Transplanted</label>
+                                                                <input type="date" required class="form-control" >      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <div class="commo">
                                                                 <label for="comm_name">Commodity</label>
-                                                                <select id="comm_name" class="form-select comm_name" name="comm_name" onchange="updateCMN()">
+                                                                <select id="comm_name" class="form-select comm_name" name="comm_name">
                                                                   <option value="">Select Commodity *</option>
                                                                         <?php  
-                                                                            $sql = "SELECT * FROM comm_posnew GROUP BY comm";
+                                                                            $sql = "SELECT * FROM commodity_prod_cms GROUP BY comm";
                                                                             $query = mysqli_query($conn, $sql);
                                                                         ?>
                                                                         <?php foreach($query as $q){ ?>  
@@ -141,25 +120,11 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                         </div>
                                                     </div> 
 
-                                                    <div class="col-md-6">
-                                                        <div class="mb-3">
-                                                            <div class="commo">
-                                                                <label for="dbr">Maturity Days</label>
-                                                                <input type="number" required class="form-control" placeholder="Please Enter Maturity Days   *" id="mtd" oninput="updateMTD()">      
-                                                            </div>                                        
-                                                        </div>
-                                                    </div> 
-                                                    
-                                                    
-                                                </div>
-
-                                                <div class="row">
-
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <div class="commo">
-                                                                <label for="dbh">Distance Over Hill</label>
-                                                                <input type="number" required class="form-control" placeholder="Please Enter DH *" id="dbh" oninput="updateDH()">      
+                                                                <label for="dbr">Date Sown</label>
+                                                                <input type="date" required class="form-control" id="date_sown">      
                                                             </div>                                        
                                                         </div>
                                                     </div> 
@@ -167,54 +132,46 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <div class="commo">
-                                                                <label for="dbr">Distance Over Row</label>
-                                                                <input type="number" required class="form-control" placeholder="Please Enter DR *" id="dbr" oninput="updateDR()">      
+                                                                <label for="dbr">Harvest Schedule</label>
+                                                                <button type="button" onclick="filter()" id="filter001" class="btn btn-primary form-control">Schedule</button>    
                                                             </div>                                        
                                                         </div>
                                                     </div> 
 
-                                                    <div class="col-md-4">
-                                                        <div class="mb-3">
-                                                            <div class="commo">
-                                                            <label for="freq_del">Frequency of Harvest per Week</label>  
-                                                            <input type="number" required class="form-control" placeholder="Please Enter Frequency *" id="frc" oninput="updateFRC()">    
-
-                                                            <!--<select style="display:none;" name="selected_days[]" id="selected_days" style="width:100%;" class="select2 form-select select2-multiple" multiple="multiple" data-placeholder="Choose ..." onchange="updateFQY()">
-
-                                                                <?php
-                                                                $allowed_days = [7 => 'Sunday', 1 => 'Monday', 2 => 'Tuesday', 3 => 'Wednesday', 4 => 'Thursday', 5 => 'Friday', 6 => 'Saturday'];
-                                                                foreach ($allowed_days as $day_number => $day_name) {
-                                                                    echo "<option value='$day_number'>$day_name</option>";
-                                                                }
-                                                                ?>
-                                                            </select>-->
-
-                                                            </div>                                        
-                                                        </div>
-                                                    </div> 
-
-                                                </div>
-
-                                                <div class="row">
                                                     
-                                                    <div class="col-md-12">
-                                                        <div class="mb-3">
-                                                            <div class="commo">
-                                                                <label for="dbh">Date Saved</label>
-                                                                <input type="date" required class="form-control" id="dts" oninput="updateDTS()">      
-                                                            </div>                                        
-                                                        </div>
-                                                    </div> 
+                                                    
                                                     
                                                 </div>
 
-                                    <button type="button" class="btn btn-success add-btn" id="add-btn">Add +</button>
+                                    <div id="schedule_table">
+
+                                    </div>
+
+                                                      
                                     <button type="button" class="btn btn-primary submit-btn" id="submit-btn">Save</button>
                                 </div>
                                 <!-- end card-body-->
                             </div>
                             <!-- end card-->
                         </div>
+
+                        
+                        <script>
+                            $(document).ready(function(){
+                            $('#filter001').click(function(){
+                                var comm_name = $('#comm_name').val(); 
+                                var date_sown = $('#date_sown').val();                                                   
+                                    $.ajax({
+                                        url:"productionmonitoringaddfetch.php",
+                                        method:"POST",
+                                        data:{comm_name:comm_name,date_sown:date_sown},
+                                        success:function(data){
+                                            $('#schedule_table').html(data);
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
                      
                     
                         <script>
@@ -237,7 +194,6 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                         mat_days: row.find('#mat_days').val(),
                                                         comm: row.find('#comm').val(),
                                                         days_in_week: row.find('#days_in_week').val(),
-                                                        frequency: row.find('#frequency').val(),
                                                     };
 
                                                     // Push the rowData to the dataArray
@@ -359,13 +315,6 @@ $finalcode='PC'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                 var cmnValue = document.getElementById("comm_name").value;
                                 document.querySelectorAll('input[name="comm[]"]').forEach(function (input) {
                                     input.value = cmnValue;
-                                });
-                            }
-
-                            function updateFRC() {
-                                var frcValue = document.getElementById("frc").value;
-                                document.querySelectorAll('input[name="frequency[]"]').forEach(function (input) {
-                                    input.value = frcValue;
                                 });
                             }
 

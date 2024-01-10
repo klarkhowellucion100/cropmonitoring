@@ -67,18 +67,20 @@ $result = mysqli_fetch_assoc($data);
     <link href="function/datatable/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
 
-<script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"> </script>
-<link rel="apple-touch-icon" href="icons/logo1.png">
-<link rel="manifest" href="manifest.json">
+    <script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"> </script>
+    <link rel="apple-touch-icon" href="icons/logo1.png">
+    <link rel="manifest" href="manifest.json">
 
-<script src="src/index.js"></script>
+    <script src="src/index.js"></script>
 </head>
 
 
@@ -243,6 +245,24 @@ $result = mysqli_fetch_assoc($data);
                             </li>
 
                         <li class="menu-title">Data Entry</li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="uil-home-alt"></i>
+                                    <span>Monitoring</span>
+                                </a>
+                                    <ul class="sub-menu" aria-expanded="true">                                        
+                                        <?php if($usertype=="Admin"){?> 
+                                        <li>
+                                            <a href="productionmonitoringadd.php">Production</a>                                           
+                                        </li>
+
+                                        <li>
+                                            <a href="productiondetails.php">Schedule</a>                                            
+                                        </li>
+                                        <?php } ?>                                          
+                                    </ul>
+                            </li>
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">

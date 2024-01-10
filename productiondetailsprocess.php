@@ -18,6 +18,7 @@ if (isset($_POST['dataArray'])) {
         $mat_days = mysqli_real_escape_string($conn, $data['mat_days']);
         $comm = mysqli_real_escape_string($conn, $data['comm']);
         $days_in_week = mysqli_real_escape_string($conn, $data['days_in_week']);
+        $frequency = mysqli_real_escape_string($conn, $data['frequency']);
        
         // ... (repeat for other variables)
 
@@ -25,7 +26,7 @@ if (isset($_POST['dataArray'])) {
         $coef = mysqli_real_escape_string($conn, $data['coef']);
         if ($coef !== "") {
             // Your database insertion query, adjust based on your actual table structure
-        $insertQuery = "INSERT INTO commodity_prod_cms (coef,code,date_created,dh,dr,mat_days,comm,days_in_week) VALUES ('$coef','$code','$date_created','$dh','$dr','$mat_days','$comm','$days_in_week')";
+        $insertQuery = "INSERT INTO commodity_prod_cms (coef,code,date_created,dh,dr,mat_days,comm,days_in_week,frequency) VALUES ('$coef','$code','$date_created','$dh','$dr','$mat_days','$comm','$days_in_week','$frequency')";
         
             // Perform the insertion
             $result = mysqli_query($conn, $insertQuery);
