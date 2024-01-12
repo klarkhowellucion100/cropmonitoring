@@ -220,12 +220,12 @@ $result = mysqli_fetch_assoc($data);
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="uil-home-alt"></i>
+                                    <i class="uil-analysis"></i>
                                     <span>Dashboard</span>
                                 </a>
                                     <ul class="sub-menu" aria-expanded="true">
                                         
-                                        <li><a href="dashboardcommitment.php">Commitment</a>
+                                        <li><a href="dashboardcommitment.php">Schedule</a>
                                         
                                         </li>
 
@@ -249,19 +249,27 @@ $result = mysqli_fetch_assoc($data);
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="uil-file-alt"></i>
-                                    <span>Monitoring</span>
+                                    <span>Field Monitoring</span>
                                 </a>
                                     <ul class="sub-menu" aria-expanded="true">                                        
                                         <?php if($usertype=="Admin"){?> 
                                         <li>
-                                            <a href="productionmonitoringadd.php">Production</a>                                           
+                                            <a href="prodwholeharvest.php">Before Harvest</a>                                           
                                         </li>
 
                                         <li>
-                                            <a href="#">Field Monitoring</a>                                            
+                                            <a href="prodweekharvest.php">Weekly Harvest</a>                                            
                                         </li>
                                         <?php } ?>                                          
                                     </ul>
+                            </li>
+                           
+
+                            <li>
+                                <a style='cursor:pointer;' href="productionmonitoringadd.php">
+                                    <i class="uil-file-alt"></i>
+                                    <span>Production Schedule</span>
+                                </a>
                             </li>
 
                             <li>
@@ -287,7 +295,7 @@ $result = mysqli_fetch_assoc($data);
                         <li>
                             <a style='cursor:pointer;' href="farmerregistration.php">
                                 <i class="uil-file-alt"></i>
-                                <span>Registration</span>
+                                <span>Farmer Registration</span>
                             </a>
                         </li>
 
@@ -303,7 +311,7 @@ $result = mysqli_fetch_assoc($data);
                             </li>
                             <li>
                                 <a style='cursor:pointer;' href="logoutprocess.php">
-                                    <i class="uil-file-alt"></i>
+                                    <i class="uil-sign-out-alt"></i>
                                     <span>Logout</span>
                                 </a>
                             </li>
