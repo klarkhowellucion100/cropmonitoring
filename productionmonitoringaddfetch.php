@@ -46,7 +46,7 @@ $code_m = $_POST['code_m'];
         </div>
     </div>
 </div>
-
+<div class="table-responsive">
 <?php
 $query1 = mysqli_query($conn, "SELECT coef, mat_days, days_in_week, frequency FROM commodity_prod_cms WHERE (`comm` LIKE '%$comm_name%') ORDER BY comm ASC");
 while ($q = mysqli_fetch_array($query1)) : ?>
@@ -275,10 +275,10 @@ while ($q = mysqli_fetch_array($query1)) : ?>
             </tr>
         </tbody>
     </table>
-
+    
 <?php endwhile; ?>
 
-
+</div>
                         <script>
                             function updateDTSW() {
                                 var dtswValue = document.getElementById("date_sown_f").value;
