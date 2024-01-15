@@ -245,24 +245,13 @@ $result = mysqli_fetch_assoc($data);
                             </li>
 
                         <li class="menu-title">Data Entry</li>
-
                             <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <a style='cursor:pointer;' href="prodharvestmonitoring.php">
                                     <i class="uil-file-alt"></i>
                                     <span>Field Monitoring</span>
                                 </a>
-                                    <ul class="sub-menu" aria-expanded="true">                                        
-                                        <?php if($usertype=="Admin"){?> 
-                                        <li>
-                                            <a href="prodwholeharvest.php">Before Harvest</a>                                           
-                                        </li>
-
-                                        <li>
-                                            <a href="prodweekharvest.php">Weekly Harvest</a>                                            
-                                        </li>
-                                        <?php } ?>                                          
-                                    </ul>
                             </li>
+                         
                            
 
                             <li>

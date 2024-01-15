@@ -65,7 +65,7 @@
                                                                 <div class="mb-3">
                                                                     <div class="commo">
                                                                         <label for="fname">Full Name</label>
-                                                                        <input type="text" required class="form-control" id="fname1" placeholder='Enter First Name *' name='fname1' value="<?php echo $q['fname'];?>">      
+                                                                        <input type="text" required class="form-control" id="fname1" readonly placeholder='Enter First Name *' name='fname1' value="<?php echo $q['fname'];?>">      
                                                                     </div>                                        
                                                                 </div>
 
