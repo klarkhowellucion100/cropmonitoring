@@ -12,5 +12,8 @@ if (isset($_GET['delete'])) {
 
   // header("Location:courtorderentrytracker.php?deleted=success");
   // exit();
+} if($result){
+  $query="DELETE FROM monitoring_production_cms WHERE (code LIKE '%$id%')";
+  $result = mysqli_query($conn,$query);
 }
 ?>

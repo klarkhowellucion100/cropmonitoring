@@ -35,37 +35,19 @@ $date_y = date('Y');
                     <!-- end page title -->
 
               
-                        <!-- Start Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                 
-
-
-
-                                   
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick=addproduct()>Save changes</button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-            <!-- End Modal -->
+               
                     
 
                     <div class="row" id="printarea_01">
                         <div class="col-lg-12 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <a class='btn btn-primary' href="prodharvestmonitoring.php" style="margin-top: 20px;"> Exit </a> 
+                                    <button class='btn btn-primary' onclick=goBack()>Back</button>
+                                                <script>
+                                                    function goBack(){
+                                                        window.location.href='prodharvestmonitoring.php';
+                                                        }
+                                                </script> 
                                   
                                     <div class="row">
                                         <?php
@@ -101,8 +83,9 @@ $date_y = date('Y');
                                                             <input type="text" id="date_sown_id" value="<?php echo $result1['date_sown']; ?>">
                                                             <input type="text" id="date_harvest_id" value="<?php echo $result1['date_harvest']; ?>">
                                                         </div>
-                                                        <a class='monitorinfo btn btn-primary' style="margin-top: 20px;" data-id="<?php echo $result1['code'];?>"> Monitor </a> 
-                                                        <a class='productinfo1 btn btn-primary' style="margin-top: 20px;" data-id="<?php echo $result1['code'];?>"> Comments </a> 
+                                                        <!--<a class='monitorinfo btn btn-primary' style="margin-top: 20px;" data-id="<?php echo $result1['code'];?>"> Monitor </a> -->
+                                                        <a class='monitorinfo02 btn btn-primary' style="margin-top: 20px;" href="prodharvestmonitoringwholeadddetails.php?code=<?php echo $result1['code']; ?>&&name=<?php echo $name_prod; ?>&&year=<?php echo $year_prod; ?>"> Monitor </a> 
+                                                        <a class='monitorinfo01 btn btn-primary' style="margin-top: 20px;" href="prodharvestmonitoringwholefindings.php?code=<?php echo $result1['code']; ?>&&name=<?php echo $name_prod; ?>&&year=<?php echo $year_prod; ?>"> Findings </a> 
 
                                                 
                                                         
@@ -120,46 +103,20 @@ $date_y = date('Y');
                         </div>
                     </div>
 
-                    <script>         
-                                $(document).ready(function(){
-                                $('.monitorinfo').click(function(){
-                                    var code = $(this).data('id');
-                                    var comm_id = document.getElementById('comm_id').value;
-                                    var name_id = document.getElementById('name_id').value;
-                                    var barangay_id = document.getElementById('barangay_id').value;
-                                    var hills_id = document.getElementById('hills_id').value;
-                                    var date_sown_id = document.getElementById('date_sown_id').value;
-                                    var date_harvest_id = document.getElementById('date_harvest_id').value;
-                                   
-                                    $.ajax({
-                                                url:"prodharvestmonitoringwholeadd.php",
-                                                method:"POST",
-                                                data:{code:code,comm_id:comm_id,name_id:name_id,barangay_id:barangay_id,hills_id:hills_id,date_sown_id:date_sown_id,date_harvest_id:date_harvest_id},
-                                                success:function(data){
-                                                    $('.modal-body').html(data);
-                                                    $('#exampleModal').modal('show');
-                                                    displayData();
-                                                }
-                                            });
-
-                                })
-                            })
-                        </script>
-
                   
+
+               
                     
-
-                  
-<script>
-    function printPage(){
-        var printarea_01 = document.getElementById('printarea_01').innerHTML;
-     
-        window.print();
-    }
-</script>
+                    <script>
+                        function printPage(){
+                            var printarea_01 = document.getElementById('printarea_01').innerHTML;
+                        
+                            window.print();
+                        }
+                    </script>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 

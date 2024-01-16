@@ -73,7 +73,7 @@
 
                                 <div class="btn-group" role="group">
                                     <a class="feedbackfetch btn btn-outline-light text-truncate" onClick="productionupdate('name=<?php echo $result001 ['name'];?>&&year=<?php echo $date_y;?>')"><i class="uil-search-alt"></i>Production</a>
-                                    <a class="feedbackfetch btn btn-outline-light text-truncate" onClick="deleteme01('delete=<?php echo $result001 ['name'];?>')"><i class="uil-search-alt"></i>Harvest</a>
+                                   <!-- <a class="feedbackfetch btn btn-outline-light text-truncate" onClick="deleteme01('delete=<?php echo $result001 ['name'];?>')"><i class="uil-search-alt"></i>Harvest</a>-->
                                 </div>
                             </div>
                         </div>

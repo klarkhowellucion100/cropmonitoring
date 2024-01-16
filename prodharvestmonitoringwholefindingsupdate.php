@@ -59,13 +59,19 @@ $id = $_POST['id'];
 <!--START OVERALL -->
 
                     <?php
-                        $query1 = mysqli_query($conn,"SELECT * FROM production_cms WHERE id='$id'");
+                        $query1 = mysqli_query($conn,"SELECT * FROM monitoring_production_cms WHERE id='$id'");
                         while($q = mysqli_fetch_array($query1)): ?>
 
                                         <div class="mb-3" style="display: none;">
                                                 <label for="code" class="form-label">ID</label>
                                                 <input style="display:none;" type="text" class="form-control" name="mon_id" id="mon_id" readonly value="<?php echo $q['id'];?>">
                                                 <p><?php echo $q['id'];?></p>
+                                            </div>
+
+                                            <div class="mb-3" style="display: none;">
+                                                <label for="code" class="form-label">ID</label>
+                                                <input style="display:none;" type="text" class="form-control" name="prod_id" id="prod_id" readonly value="<?php echo $q['mon_id'];?>">
+                                                <p><?php echo $q['mon_id'];?></p>
                                             </div>
 
                                             <div class="mb-3">
@@ -109,12 +115,13 @@ $id = $_POST['id'];
 
                                             <div class="mb-3" >
                                                 <label for="date_monitor" class="form-label">Date of Monitoring</label>
-                                                <input type="date" class="form-control" id="date_monitor" name="date_monitor" value="<?php echo $date_f;?>">
+                                                <input type="date" class="form-control" id="date_monitor" name="date_monitor" value="<?php echo $q['date_monitor'];?>">
                                             </div>
 
                                             <div class="mb-3" >
                                                 <label for="mon_status" class="form-label">Status</label>
                                                 <select class="form-select" aria-label="Default select example" name="mon_status" id="mon_status">
+                                                        <option value='<?php echo $q['mon_status'];?>'><?php echo $q['mon_status'];?></option>
                                                         <option value='On Track'>On Track</option>
                                                         <option value='Partially Damaged'>Partially Damaged</option>
                                                         <option value='Totally Damaged'>Totally Damaged</option>                              
@@ -123,7 +130,7 @@ $id = $_POST['id'];
 
                                             <div class="mb-3" >
                                                 <label for="mon_findings" class="form-label">Findings</label>
-                                                <textarea class="form-control" name="comon_findingsde" placeholder="Please enter detailed findings..." rows="6" id="mon_findings"></textarea>
+                                                <textarea class="form-control" name="comon_findingsde" placeholder="Please enter detailed findings..." rows="6" id="mon_findings"><?php echo $q['mon_findings'];?></textarea>
                                             </div>
                                         
                                             <div class="mb-3" style="display:none;">

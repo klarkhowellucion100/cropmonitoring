@@ -32,7 +32,7 @@ $date_sown = $_POST['date_sown'];
 
                     ?>
 
-<?php
+                    <?php
                         $query1 = mysqli_query($conn,"SELECT * FROM commodity_prod_cms WHERE (`comm` LIKE '%$comm_name%') ORDER BY comm ASC");
                         while($q = mysqli_fetch_array($query1)): ?>
                 <table id="table_form2" class="table table-striped table-bordered dt-responsive nowrap"
