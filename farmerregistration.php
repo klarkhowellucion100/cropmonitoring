@@ -349,23 +349,23 @@
                                     </div>
 
                                     <script>         
-    $(document).ready(function(){
-    $('.farmerinfo').click(function(){
-        var farmerid = $(this).data('id');
-    
-        $.ajax({
-                    url:"farmerregistrationupdate.php",
-                    method:"POST",
-                    data:{farmerid:farmerid},
-                    success:function(data){
-                        $('#modal_update').html(data);
-                        $('#myModalUpdate').modal('show');
-                    }
-                });
+                                        $(document).ready(function(){
+                                        $('.farmerinfo').click(function(){
+                                            var farmerid = $(this).data('id');
+                                        
+                                            $.ajax({
+                                                        url:"farmerregistrationupdate.php",
+                                                        method:"POST",
+                                                        data:{farmerid:farmerid},
+                                                        success:function(data){
+                                                            $('#modal_update').html(data);
+                                                            $('#myModalUpdate').modal('show');
+                                                        }
+                                                    });
 
-    })
-})
-</script>
+                                            })
+                                        })
+                                    </script>
 
 
 

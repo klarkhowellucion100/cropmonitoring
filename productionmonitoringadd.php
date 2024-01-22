@@ -131,6 +131,16 @@ $finalcode='PRD'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                         </div>
                                                     </div> 
 
+                                                    <div class="col-md-2" style="display:none;">
+                                                        <div class="mb-3">
+                                                            <div class="commo">
+                                                                <label for="encoder_f">Encoder</label>
+                                                                <input type="text" id="encoder_f" value="<?php echo $userid;?>" required class="form-control">      
+                                                            </div>                                        
+                                                        </div>
+                                                    </div> 
+
+
                                                     
                                                     <div class="col-md-2">
                                                         <div class="mb-3">
@@ -162,7 +172,7 @@ $finalcode='PRD'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                                   <option value="">Select Status *</option>
                                                                   <option value="Committed">Committed</option>
                                                                   <option value="Uncommitted">Uncommitted</option>
-                                                                      
+                                                                  <option value="Advisory">Advisory</option>
                                                             </select>  
                                                             </div>                                        
                                                         </div>
@@ -186,9 +196,9 @@ $finalcode='PRD'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                                         }
                                                     </style>
 
-                                                    <div id="map"></div>
+                                                    <!--<div id="map"></div>
                                                     <button onclick="getCurrentLocation()" class="btn btn-success">Get My Location</button> <br>
-                                                    <button onclick="clearPolygons()" class="btn btn-primary">Clear Polygons</button>
+                                                    <button onclick="clearPolygons()" class="btn btn-primary">Clear Polygons</button>-->
                                                     <textarea class="form-control" id="coordinates" readonly style="display:none;"></textarea>
 
                                                     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -318,11 +328,12 @@ $finalcode='PRD'.date('d').''.date('Y').''.date('m').''.createRandomPassword();
                                 var coordinates = $('#coordinates').val();     
                                 var comm_area = $('#comm_area').val();      
                                 var status_comm_f = $('#status_comm_f').val();    
-                                var code_m = $('#code_m').val();                                      
+                                var code_m = $('#code_m').val();    
+                                var encoder_f = $('#encoder_f').val();                                    
                                     $.ajax({
                                         url:"productionmonitoringaddfetch.php",
                                         method:"POST",
-                                        data:{comm_name:comm_name,farmer_name:farmer_name,no_hills:no_hills,dt_trans:dt_trans,coordinates:coordinates,comm_area:comm_area,status_comm_f:status_comm_f,code_m:code_m},
+                                        data:{encoder_f:encoder_f,comm_name:comm_name,farmer_name:farmer_name,no_hills:no_hills,dt_trans:dt_trans,coordinates:coordinates,comm_area:comm_area,status_comm_f:status_comm_f,code_m:code_m},
                                         success:function(data){
                                             $('#schedule_table').html(data);
                                         }

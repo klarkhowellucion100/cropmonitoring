@@ -15,7 +15,6 @@ $userbday = $_SESSION['bday'];
 $usersex = $_SESSION['gender'];
 $usernumber = $_SESSION['cnumber'];
 $userauthorize = $_SESSION['regval'];
-
 $userass_brgy = $_SESSION['as_brgy'];
 
 
@@ -30,7 +29,7 @@ if($userprofile==true){
     header("location:login.html");
 }
 
-$query= "SELECT * FROM usertablehubpos WHERE uname ='$userprofile'";
+$query= "SELECT * FROM usertable_cms WHERE uname ='$userprofile'";
 $data = mysqli_query($conn,$query);
 $result = mysqli_fetch_assoc($data);
 
@@ -216,7 +215,7 @@ $result = mysqli_fetch_assoc($data);
                     <ul class="metismenu list-unstyled" id="side-menu">
 
 
-                        <li class="menu-title">Dashboard</li>
+                        <li class="menu-title">Dashboard </li>
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -245,7 +244,7 @@ $result = mysqli_fetch_assoc($data);
                             </li>
 
                         <li class="menu-title">Data Entry</li>
-                            <li>
+                         <li>
                                 <a style='cursor:pointer;' href="prodharvestmonitoring.php">
                                     <i class="uil-file-alt"></i>
                                     <span>Field Monitoring</span>

@@ -1,0 +1,70 @@
+
+
+*{
+    box-sizing: border-box;
+}
+#yourTableId01{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#yourTableId01 td,.table th{
+padding:12px 15px;
+border:1px solid #ddd;
+text-align: center;
+font-size:16px;
+}
+
+#yourTableId01 th{
+    background-color: royalblue;;
+    color:#ffffff;
+}
+
+#yourTableId01 tbody tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+
+/*responsive*/
+
+@media(max-width: 700px){
+
+    .seeMoreThLabel {
+        display: block !important;
+    }
+
+    .seeMoreTdLabel {
+        display: block !important;
+    }
+
+    .toggletd {
+        display: none !important;
+    }
+    
+    #yourTableId01 thead{
+        display: none;
+    }
+
+    #yourTableId01, #yourTableId01 tbody, #yourTableId01 tr, #yourTableId01 td{
+        display: block;
+        width: 100%;
+    }
+    #yourTableId01 tr{
+        margin-bottom:15px;
+    }
+    #yourTableId01 td{
+        text-align: left;
+        padding-left: 35%;
+        position: relative;
+    }
+    #yourTableId01 td::before{
+        content: attr(data-label)":";
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:10px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+    }
+   
+}

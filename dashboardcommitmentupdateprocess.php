@@ -23,11 +23,11 @@ if (isset($_POST['dataArray'])) {
         $date_harvest = mysqli_real_escape_string($conn, $data['date_harvest']);
         $week_harvest = mysqli_real_escape_string($conn, $data['week_harvest']);
         $date_range = mysqli_real_escape_string($conn, $data['date_range']);
-        $location = mysqli_real_escape_string($conn, $data['location']);
         $area = mysqli_real_escape_string($conn, $data['area']);
         $status_comm = mysqli_real_escape_string($conn, $data['status_comm']);
         $date_sown = mysqli_real_escape_string($conn, $data['date_sown']);
         $date_created = mysqli_real_escape_string($conn, $data['date_created']);
+        
         $encoder = mysqli_real_escape_string($conn, $data['encoder']);
         $date_validated = mysqli_real_escape_string($conn, $data['date_validated']);
   
@@ -36,11 +36,10 @@ if (isset($_POST['dataArray'])) {
 
         // Check if $comm_priv is not empty
         $hills = mysqli_real_escape_string($conn, $data['hills']);
-        $status_comm = mysqli_real_escape_string($conn, $data['status_comm']);
-        if ($hills !== "" && in_array($status_comm, ["Committed", "Advisory"])) {
+        if ($hills !== "") {
             // Your database insertion query, adjust based on your actual table structure
-        $insertQuery = "INSERT INTO production_cms (encoder,code,comm,name,coef,hills,frequency,vol_del_day,vol_del_week,date_trans,mat_days,date_harvest,week_harvest,date_range,location,area,status_comm,date_sown,date_created) 
-        VALUES ('$encoder','$code','$comm','$name','$coef','$hills','$frequency','$vol_del_day','$vol_del_week','$date_trans','$mat_days','$date_harvest','$week_harvest','$date_range','$location','$area','$status_comm','$date_sown','$date_created')";
+        $insertQuery = "INSERT INTO production_validated_cms (code,comm,name,coef,hills,frequency,vol_del_day,vol_del_week,date_trans,mat_days,date_harvest,week_harvest,date_range,area,status_comm,date_sown,date_created,encoder,date_validated) 
+        VALUES ('$code','$comm','$name','$coef','$hills','$frequency','$vol_del_day','$vol_del_week','$date_trans','$mat_days','$date_harvest','$week_harvest','$date_range','$area','$status_comm','$date_sown','$date_created','$encoder','$date_validated')";
         
             // Perform the insertion
             $result = mysqli_query($conn, $insertQuery);
@@ -51,19 +50,6 @@ if (isset($_POST['dataArray'])) {
                 echo json_encode(['status' => 'error', 'message' => 'Error inserting data into the database']);
                 exit; // Terminate script
             }
-        }elseif($hills !== "" && $status_comm === "Uncommitted"){
-            $insertQuery = "INSERT INTO production_validated_cms (date_validated,encoder,code,comm,name,coef,hills,frequency,vol_del_day,vol_del_week,date_trans,mat_days,date_harvest,week_harvest,date_range,location,area,status_comm,date_sown,date_created) 
-            VALUES ('$date_validated','$encoder','$code','$comm','$name','$coef','$hills','$frequency','$vol_del_day','$vol_del_week','$date_trans','$mat_days','$date_harvest','$week_harvest','$date_range','$location','$area','$status_comm','$date_sown','$date_created')";
-            
-                // Perform the insertion
-                $result = mysqli_query($conn, $insertQuery);
-
-                // Check if the insertion was successful
-                if (!$result) {
-                    // Handle the error as needed
-                    echo json_encode(['status' => 'error', 'message' => 'Error inserting data into the database']);
-                    exit; // Terminate script
-                }
         }
     }
 

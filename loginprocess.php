@@ -39,7 +39,6 @@ function login(){
        $_SESSION['cnumber'] = $row['cnumber'];
        $_SESSION['type'] = $row['type'];
        $_SESSION['regval'] = $row['regval'];
-
        $_SESSION['region'] = $row['region'];
        $_SESSION['province'] = $row['province'];
        $_SESSION['municipality'] = $row['municipality'];

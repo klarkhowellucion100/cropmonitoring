@@ -52,13 +52,13 @@ $date_f = date('Y-m-d');
                                     <p class="card-title-desc">Projected vs Actual</p>
 
                                         <div class="d-flex flex-wrap gap-2 mb-10">
-                                            <button onclick="goCommitment()" type="button" class="btn btn-primary waves-effect waves-light">
+                                            <button onclick="goCommitment()" type="button" class="btn btn-outline-primary waves-effect waves-light">
                                                 Reported <!--<i class="uil uil-arrow-right ms-2"></i> -->
                                             </button>
                                             <button onclick="goValidated()" type="button" class="btn btn-outline-primary waves-effect waves-light">
                                                 Validated <!--<i class="uil uil-arrow-right ms-2"></i>--> 
                                             </button>
-                                            <button onclick="goAdvisory()" type="button" class="btn btn-outline-primary waves-effect waves-light">
+                                            <button onclick="goAdvisory()" type="button" class="btn btn-primary waves-effect waves-light">
                                                 <!--<i class="uil uil-check me-2"></i>--> Advisory
                                             </button>
 
@@ -170,7 +170,7 @@ $date_f = date('Y-m-d');
                                                                                     <tbody id="myTable">
                                                                                         <?php
                                                                                             include 'db.inc.php';
-                                                                                            include 'queries/dashboardcommitmentquery.php';
+                                                                                            include 'queries/dashboardcommitmentqueryadvisory.php';
                                                                                            
                                                                                         while($result1 = mysqli_fetch_array($query1)): ?>
                                                                                         <tr>
@@ -353,7 +353,7 @@ $date_f = date('Y-m-d');
                                                                                     <tbody id="myTable2">
                                                                                         <?php
                                                                                             include 'db.inc.php';
-                                                                                            include 'queries/dashboardcommitmentquery.php';
+                                                                                            include 'queries/dashboardcommitmentqueryadvisory.php';
                                                                                         while($result1 = mysqli_fetch_array($query2)): ?>
                                                                                         <tr>
                                                                                         
@@ -464,7 +464,7 @@ $date_f = date('Y-m-d');
                                                                                     <tbody id="myTable3">
                                                                                         <?php
                                                                                         include 'db.inc.php';
-                                                                                        include 'queries/dashboardcommitmentquery.php';
+                                                                                        include 'queries/dashboardcommitmentqueryadvisory.php';
                                                                                         while($result1 = mysqli_fetch_array($query3)): ?>
                                                                                         <tr>
                                                                                         
