@@ -39,11 +39,13 @@ $val_date_trans = $_POST['val_date_trans'];
                         $date_y = date('Y');
 
                     ?>
-<div class="col-md-12">
-                               
+<div class="col-md-12" style="padding-top: 30px;">
+                                            <div class="alert alert-success" role="alert">
+                                                Successfully generated! Please enter the Actual Date Sown below.
+                                            </div>
     <div class="mb-3">
         <div class="commo">
-            <label for="val_name">Date Sown <?php echo $val_name; ?></label>
+            <label for="val_name">Actual Date Sown <?php echo $val_name; ?></label>
             <input type="date" class="form-control" name="date_sown_f[]" id="date_sown_f" onchange="updateHarvestDates()" oninput="updateDTSW()">
         </div>
     </div>
@@ -52,7 +54,7 @@ $val_date_trans = $_POST['val_date_trans'];
 <?php
 $query1 = mysqli_query($conn, "SELECT coef, mat_days, days_in_week, frequency FROM commodity_prod_cms WHERE (`comm` LIKE '%$val_comm%') ORDER BY comm ASC");
 while ($q = mysqli_fetch_array($query1)) : ?>
-    <table id="table_form2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+    <table style="display:none;" id="table_form2" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
         <thead>
             <tr>
                 <th >Code</th>

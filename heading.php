@@ -126,7 +126,7 @@ $result = mysqli_fetch_assoc($data);
 
                 <div class="d-flex">
                     <div class="dropdown d-inline-block d-lg-none ms-2">
-                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" >
                                 <i class="uil-search"></i>
                             </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
@@ -154,7 +154,7 @@ $result = mysqli_fetch_assoc($data);
 
 
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" >
 
                      <img style='height:30px; width:30px; border-radius:50%;' src='icons/logo1.png'/>
                              
@@ -244,12 +244,13 @@ $result = mysqli_fetch_assoc($data);
                             </li>
 
                         <li class="menu-title">Data Entry</li>
-                         <li>
+                            
+                            <!--<li>
                                 <a style='cursor:pointer;' href="prodharvestmonitoring.php">
                                     <i class="uil-file-alt"></i>
                                     <span>Field Monitoring</span>
                                 </a>
-                            </li>
+                            </li>-->
                          
                            
 
@@ -260,35 +261,42 @@ $result = mysqli_fetch_assoc($data);
                                 </a>
                             </li>
 
+
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="uil-file-alt"></i>
-                                    <span>Commodity</span>
-                                </a>
-                                    <ul class="sub-menu" aria-expanded="true">                                        
-                                        <?php if($usertype=="Admin"){?> 
-                                        <li>
-                                            <a href="commoditydetails.php">Commodity Details</a>                                           
-                                        </li>
+                                        <i class="uil-file-alt"></i>
+                                        <span>Registration</span>
+                                    </a>
+                                <ul class="sub-menu" aria-expanded="true">
 
-                                        <li>
-                                            <a href="productiondetails.php">Production Details</a>                                            
-                                        </li>
-                                        <?php } ?>                                          
-                                    </ul>
+                                    <li><a href="farmerregistration.php">Farmer</a></li>
+
+                                    <li><a href="javascript: void(0);" class="has-arrow">Commodity</a>
+                                        <ul class="sub-menu" aria-expanded="true">
+                                            <li><a href="commoditydetails.php">Commodity Details</a></li>
+                                            <li><a href="productiondetails.php">Production Coefficient</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="javascript: void(0);" class="has-arrow">Fertilizer</a>
+                                        <ul class="sub-menu" aria-expanded="true">
+                                            <li><a href="fertilizertype.php">Category/Type</a></li>
+                                            <li><a href="fertilizer.php">Fertilizer</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="pestanddisease.php" >Pest and Disease</a></li>
+
+                                    <li><a href="javascript: void(0);" class="has-arrow">Control Agents</a>
+                                        <ul class="sub-menu" aria-expanded="true">
+                                            <li><a href="controlagenttype.php">Category/Type</a></li>
+                                            <li><a href="controlagent.php">Control Agent</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>
 
-                        <?php if($usertype=="Admin"){?>
-                    
-                        <li>
-                            <a style='cursor:pointer;' href="farmerregistration.php">
-                                <i class="uil-file-alt"></i>
-                                <span>Farmer Registration</span>
-                            </a>
-                        </li>
-
-                    
-                        <?php } ?>
+                     
 
                         <li class="menu-title">Admin</li>
                             <li>

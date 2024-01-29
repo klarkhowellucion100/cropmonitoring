@@ -285,7 +285,7 @@ MAX(CASE WHEN production_cms.week_harvest = '53' THEN production_cms.status_deta
 FROM
     production_cms, registrationhubpos
 WHERE
-    registrationhubpos.fname = production_cms.name AND YEAR(production_cms.date_harvest) = '$yearnow' AND production_cms.status_comm='Committed'
+    registrationhubpos.fname = production_cms.name AND YEAR(production_cms.date_harvest) = '$yearnow' AND production_cms.status_comm='Advisory'
 GROUP BY
     production_cms.name,
     production_cms.comm,
@@ -353,7 +353,7 @@ SUM(CASE WHEN week_harvest = '53' THEN vol_del_week END) AS Week53
 FROM
 production_cms
 WHERE
-YEAR(production_cms.date_harvest) = '$year_now' AND status_comm='Committed'
+YEAR(production_cms.date_harvest) = '$year_now' AND status_comm='Advisory'
 GROUP BY
 comm
 ORDER BY
@@ -418,7 +418,7 @@ SUM(CASE WHEN week_harvest = '53' THEN vol_del_week END) AS Week53
 FROM
 production_cms
 WHERE
-YEAR(production_cms.date_harvest) = '$year_now' AND status_comm='Committed'
+YEAR(production_cms.date_harvest) = '$year_now' AND status_comm='Advisory'
 GROUP BY
 `name`
 ORDER BY

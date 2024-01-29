@@ -53,7 +53,7 @@ $date_y = date('Y');
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="addfindings()">Save changes</button>
+                                    <button type="button" class="btn btn-primary" id="submit_array" onclick="addfindings()">Save changes</button>
                                 </div>
                                 </div>
                             </div>
@@ -75,10 +75,10 @@ $date_y = date('Y');
                     $offset = ($current_page - 1) * $records_per_page;
 
                     // Query to retrieve records with pagination
-                    $query001 = mysqli_query($conn, "SELECT * FROM production_cms WHERE code='$prod_code' ORDER BY date_harvest ASC LIMIT $offset, $records_per_page");
+                    $query001 = mysqli_query($conn, "SELECT * FROM production_validated_cms WHERE code='$prod_code' ORDER BY date_harvest ASC LIMIT $offset, $records_per_page");
 
                     // Calculate the total number of pages
-                    $total_records_query = mysqli_query($conn, "SELECT COUNT(*) AS total_records FROM production_cms WHERE code='$prod_code'");
+                    $total_records_query = mysqli_query($conn, "SELECT COUNT(*) AS total_records FROM production_validated_cms WHERE code='$prod_code'");
                     $total_records = mysqli_fetch_assoc($total_records_query)['total_records'];
                     $total_pages = ceil($total_records / $records_per_page);
                 ?>
@@ -91,12 +91,9 @@ $date_y = date('Y');
                 <table id="table_collect" class="table table-striped table-bordered wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <!-- Table headers -->
                     <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Commodity</th>
-                            <th>No. of Hills</th>
-                            <th>Date Sown</th>
+                        <tr style="vertical-align: middle;">
                             <th>Date of Expected Harvest</th>
+                            <th>Frequency</th>
                             <th>Weekly Expected Yield</th>
                             <th>Status</th>
                             <th style="display:none;">Details</th>
@@ -108,11 +105,8 @@ $date_y = date('Y');
                         <?php while ($result001 = mysqli_fetch_array($query001)): ?>
                             <tr>
                                 <!-- Your table row data -->
-                                <td><?php echo $result001['name']; ?></td>
-                                <td><?php echo $result001['comm']; ?></td>
-                                <td><?php echo $result001['hills']; ?></td>
-                                <td style="text-align: right;"><?php echo date('F d, Y', strtotime($result001['date_sown'])); ?></td>
-                                <td style="text-align: right;"><?php echo date('F d, Y', strtotime($result001['date_harvest'])); ?></td>
+                                <td style="text-align: left;"><?php echo date('F d, Y', strtotime($result001['date_harvest'])); ?></td>
+                                <td style="text-align: right;">(<?php echo $result001['frequency']; ?>) times per week</td>
                                 <td style="text-align: right;"><?php echo $result001['vol_del_week']; ?> kg</td>
                                 <td style="text-align: right;"><?php echo $result001['status_mon']; ?></td>
                                 <td style="display:none;">
@@ -231,33 +225,54 @@ $date_y = date('Y');
                     <script>
                         function addfindings(){
                             var mon_id= $('#mon_id').val();
-                            var code= $('#code').val();
-                            var name= $('#name').val();
-                            var comm= $('#comm').val();
-                            var hills= $('#hills').val();
-                            var date_sown= $('#date_sown').val();
-                            var date_harvest= $('#date_harvest').val();
-                            var date_monitor= $('#date_monitor').val();
+                            var mon_code= $('#mon_code').val();
+                            var mon_name= $('#mon_name').val();
+                            var mon_comm= $('#mon_comm').val();
+                            var mon_hills= $('#mon_hills').val();
+                            var mon_date_sown= $('#mon_date_sown').val();
+                            var mon_date_harvest= $('#mon_date_harvest').val();
+                            var mon_date_monitor= $('#mon_date_monitor').val();
                             var mon_status= $('#mon_status').val();
+                            var mon_actual_monitor= $('#mon_actual_monitor').val();
+                            var mon_actual_yield= $('#mon_actual_yield').val();
                             var mon_findings= $('#mon_findings').val();
-                            var date_created= $('#date_created').val();
-                            var encoder= $('#encoder').val();
+                            var mon_recomm= $('#mon_recomm').val();
+                            var mon_response= $('#mon_response').val();
+                            var mon_date_created= $('#mon_date_created').val();
+                            var mon_encoder= $('#mon_encoder').val();
+                            var mon_cause= $('#mon_cause').val();
+                            var code_monitor= $('#code_monitor').val();       // Update values to 1 for "Yes" and 0 for "No"
+                            var mon_pest_ex = $('.mon_pest_ex').is(':checked') ? "Yes" : "No";
+                            var mon_fert_ex = $('.mon_fert_ex').is(':checked') ? "Yes" : "No";
+                            var mon_cont_ex = $('.mon_cont_ex').is(':checked') ? "Yes" : "No";
+                            
 
                                 $.ajax({
-                                        url:"prodharvestmonitoringwholeaddinsert.php",
+                                        url:"dashboardcommitmentvalidatedinsert.php",
                                         method:"POST",
-                                        data:{code:code,
-                                            mon_id:mon_id,
-                                            name:name,
-                                            comm:comm,
-                                            hills:hills,
-                                            date_sown:date_sown,
-                                            date_harvest:date_harvest,
-                                            date_monitor:date_monitor,
+                                        data:{mon_id:mon_id,
+                                            mon_code:mon_code,
+                                            mon_name:mon_name,
+                                            mon_comm:mon_comm,
+                                            mon_hills:mon_hills,
+                                            mon_date_sown:mon_date_sown,
+                                            mon_date_harvest:mon_date_harvest,
+                                            mon_date_monitor:mon_date_monitor,
                                             mon_status:mon_status,
+                                            mon_actual_monitor:mon_actual_monitor,
+                                            mon_actual_yield:mon_actual_yield,
                                             mon_findings:mon_findings,
-                                            date_created:date_created,
-                                            encoder:encoder},
+                                            mon_recomm:mon_recomm,
+                                            mon_response:mon_response,
+                                            mon_date_created:mon_date_created,
+                                            mon_encoder:mon_encoder,
+                                            mon_cause:mon_cause,
+                                            code_monitor:code_monitor,
+                                            mon_pest_ex:mon_pest_ex,
+                                            mon_fert_ex:mon_fert_ex,
+                                            mon_cont_ex:mon_cont_ex
+
+                                        },
                                         success:function(data,status){
                                         
                                             Swal.fire({
@@ -267,11 +282,95 @@ $date_y = date('Y');
                                                     timer: 2000
                                                 }).then(() => {
                                                     $('#exampleModal').modal('hide');   
+                                                    location.reload();
                                                 });
                                             }
                                         });
                             }
                     </script>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#submit_array").click(function (e) {
+                                                e.preventDefault();
+
+                                                // Create an array to store data for each row
+                                                var dataArray = [];
+
+                                                // Loop through each row in the table
+                                                $('.table_form2 tbody tr').each(function () {
+                                                    var row = $(this);
+                                                    var rowData = {
+                                                        id_from: row.find('#id_from').val(),
+                                                        code_from: row.find('#code_from').val(),
+                                                        type_from: row.find('#type_from').val(),
+                                                        encoder_from: row.find('#encoder_from').val(),
+                                                        date_created_from: row.find('#date_created_from').val(),
+                                                        name_from: row.find('#name_from').val(),
+                                                        level_from: row.find('#level_from').val(),
+                                                        date_validated_from: row.find('#date_validated_from').val(),
+                                                        code_monitor_pd: row.find('#code_monitor_pd').val(),
+                                                        
+
+                                                        id_from1: row.find('#id_from1').val(),
+                                                        code_from1: row.find('#code_from1').val(),
+                                                        type_from1: row.find('#type_from1').val(),
+                                                        encoder_from1: row.find('#encoder_from1').val(),
+                                                        date_created_from1: row.find('#date_created_from1').val(),
+                                                        name_from1: row.find('#name_from1').val(),
+                                                        level_from1: row.find('#level_from1').val(),
+                                                        date_validated_from1: row.find('#date_validated_from1').val(),
+                                                        code_monitor_pd1: row.find('#code_monitor_pd1').val(),
+
+                                                        id_from02: row.find('#id_from02').val(),
+                                                        code_from02: row.find('#code_from02').val(),
+                                                        code_monitor_pd02: row.find('#code_monitor_pd02').val(),
+                                                        encoder_from02: row.find('#encoder_from02').val(),
+                                                        date_validated_from02: row.find('#date_validated_from02').val(),
+                                                        date_created_from02: row.find('#date_created_from02').val(),
+                                                        name_from02: row.find('#name_from02').val(),
+
+                                                        id_from03: row.find('#id_from03').val(),
+                                                        code_from03: row.find('#code_from03').val(),
+                                                        code_monitor_pd03: row.find('#code_monitor_pd03').val(),
+                                                        encoder_from03: row.find('#encoder_from03').val(),
+                                                        date_validated_from03: row.find('#date_validated_from03').val(),
+                                                        date_created_from03: row.find('#date_created_from03').val(),
+                                                        name_from03: row.find('#name_from03').val(),
+                                                        
+                                                        
+                                                      
+                                                    };
+
+                                                    // Push the rowData to the dataArray
+                                                    dataArray.push(rowData);
+                                                });
+
+                                                //alert(JSON.stringify(dataArray, null, 2));
+
+                                                // Send the dataArray to the PHP script
+                                                $.ajax({
+                                                    url: "dashboardcommitmentvalidatedinsertarray.php",
+                                                    method: "POST",
+                                                    data: { dataArray: dataArray },
+                                                    success: function (data) {
+                                                        var response = JSON.parse(data);
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
+
+<script>
+        function updateDateValidatedFrom1(value) {
+            // Assuming you want to set the value of date_validated_from1 to the input value
+            document.getElementById('date_validated_from1').value = value;
+            document.getElementById('date_validated_from').value = value;
+            document.getElementById('date_validated_from02').value = value;
+            document.getElementById('date_validated_from03').value = value;
+        }
+        
+    </script>
                     
                     <script>
                         function printPage(){

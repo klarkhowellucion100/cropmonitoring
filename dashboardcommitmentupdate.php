@@ -62,13 +62,13 @@ $id = $_POST['id'];
                         $query1 = mysqli_query($conn,"SELECT * FROM production_cms WHERE id='$id'");
                         while($q = mysqli_fetch_array($query1)): ?>
 
-                                            <div class="mb-3" >
+                                            <div class="mb-3" style="display:none;">
                                                 <label for="val_id" class="form-label">ID</label>
                                                 <input style="display:none;" type="text" class="form-control" name="val_id" id="val_id" readonly value="<?php echo $q['id'];?>">
                                                 <p><?php echo $q['id'];?></p>
                                             </div>
 
-                                            <div class="mb-3">
+                                            <div class="mb-3" style="display:none;">
                                                 <label for="val_code" class="form-label">Code</label>
                                                 <input style="display:none;" type="text" class="form-control" name="val_code" id="val_code" readonly value="<?php echo $q['code'];?>">
                                                 <p><?php echo $q['code'];?></p>
@@ -137,7 +137,7 @@ $id = $_POST['id'];
                                                 <input type="date" class="form-control" name="val_date_validated" id="val_date_validated">
                                             </div>
 
-                                            <div class="mb-3" >
+                                            <div class="mb-3" style="display:none;">
                                                 <label for="val_encoder" class="form-label">Encoder</label>
                                                 <input type="text" class="form-control" name="val_encoder" id="val_encoder" value="<?php echo $userid;?>">
                                             </div>
