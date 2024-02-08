@@ -114,7 +114,7 @@
                                                 <th>Position</th>
                                                 <th>Office</th>
                                                 <th>Status</th>
-                                                <th>Component</th>
+                                                <th>Usertype</th>
                                                 <th>Assigned Barangay</th>
                                                 <th>Action</th>
                                               
@@ -134,7 +134,7 @@
                                                 <td><?php echo $result1 ['position']; ?></td>
                                                 <td><?php echo $result1 ['office']; ?></td>
                                                 <td><?php echo $result1 ['regval']; ?></td>
-                                                <td><?php echo $result1 ['component']; ?></td>
+                                                <td><?php echo $result1 ['type']; ?></td>
                                                 <td><?php echo $result1 ['as_brgy']; ?></td>
                                                 <td> 
                                                     <a class="farmerinfo btn btn-raised btn-warning waves-effect" data-id="<?php echo $result1['id'];?>"><i class="uil-edit-alt"></i></a>

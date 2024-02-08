@@ -14,7 +14,7 @@ if(isset($_POST['submit_change'])){
     $position1 = mysqli_real_escape_string($conn,$_POST['position1']);
     $office1 = mysqli_real_escape_string($conn,$_POST['office1']);
     $regval1 = mysqli_real_escape_string($conn,$_POST['regval1']);
-    $component1 = mysqli_real_escape_string($conn,$_POST['component1']);
+    $usertype1 = mysqli_real_escape_string($conn,$_POST['usertype1']);
 
 
     $query = "UPDATE usertable_cms SET id= '".$id1."',                
@@ -23,7 +23,7 @@ if(isset($_POST['submit_change'])){
     position= '".$position1."',
     office= '".$office1."',
     regval= '".$regval1."',
-    component= '".$component1."' WHERE id= '".$id1."'";
+    type= '".$usertype1."' WHERE id= '".$id1."'";
 
 
     $result = mysqli_query($conn,$query);

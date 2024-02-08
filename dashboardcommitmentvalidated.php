@@ -58,9 +58,11 @@ $date_f = date('Y-m-d');
                                             <button onclick="goValidated()" type="button" class="btn btn-primary waves-effect waves-light">
                                                 Validated <!--<i class="uil uil-arrow-right ms-2"></i>--> 
                                             </button>
+                                            <?php if($usertype=="Admin"){?> 
                                             <button onclick="goAdvisory()" type="button" class="btn btn-outline-primary waves-effect waves-light">
                                                 <!--<i class="uil uil-check me-2"></i>--> Advisory
                                             </button>
+                                            <?php } ?>
 
                                             <script>
                                                 function goCommitment() {
@@ -93,7 +95,7 @@ $date_f = date('Y-m-d');
                                                                     <div class="col-md-12">
                                                                         <div class="mb-3">
                                                                             <div class="commo">
-                                                                                <input id="myInput" class="form-control" type="text" placeholder="Search..">
+                                                                                <!--<input id="myInput" class="form-control" type="text" placeholder="Search..">-->
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -195,8 +197,11 @@ $date_f = date('Y-m-d');
                                                     </div>
 <!--################################################################################################ Update Modal End ######################################################################-->
 
+
+
                                                                             <div class="table-responsive" id='table-overallview'>
-                                                                                <table class="table table-bordered border-info wrap table-merge" style="border-collapse: collapse; border-spacing: 0; width: 100%; width: 500px;" id="yourTableId01">
+
+                                                                                <table class="table table-bordered border-info wrap table-merge table_001" style="border-collapse: collapse; border-spacing: 0; width: 100%; width: 500px;" id="yourTableId01">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th style="display:none;">ID</th>
@@ -238,9 +243,12 @@ $date_f = date('Y-m-d');
                                                                                             ?>
                                                                                                 <th>Action</th>
                                                                                         </tr>
+
                                                                                     </thead>
 
                                                                                     <tbody id="myTable">
+                                                                            
+                                                                                           
                                                                                         <?php if($usertype=="Admin"){?> 
                                                                                             <?php
                                                                                                 include 'db.inc.php';
@@ -248,6 +256,7 @@ $date_f = date('Y-m-d');
                                                                                             
                                                                                                 while($result1 = mysqli_fetch_array($query1)): 
                                                                                                 if ($usertype=="Admin" || $result1['barangay'] == $userass_brgy):?>
+                                                                                             
                                                                                             <tr>
                                                                                                                                 
                                                                                             
@@ -266,9 +275,8 @@ $date_f = date('Y-m-d');
                                                                                                 <td data-label="Technology Adoption">
                                                                                                     <a class="techinfo01a btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['code']; ?>"><i class="uil-search-plus"></i></a>
                                                                                                 </td>
-                                                                                            
-                                                                                                
-                                                                                                
+
+                                                                                               
                                                                                             
                                                                                                     <?php
                                                                                                     for ($week = 1; $week <= 53; $week++) {
@@ -301,7 +309,9 @@ $date_f = date('Y-m-d');
                                                                                                         if ($result1['Week' . $week] == 0) {
                                                                                                             echo "";
                                                                                                         } else {
-                                                                                                            echo "<a class='weeklyinfo01' data-id='{$result1['id' . $week]}'>" . number_format($result1['Week' . $week], 2) . "</a>";
+
+                                                                                                            echo "<p>Pojected: </p><a class='weeklyinfo01' data-id='{$result1['id' . $week]}'>" . number_format($result1['Week' . $week], 2) . "</a>";
+
                                                                                                         }
 
                                                                                                         echo "</span>
@@ -328,6 +338,7 @@ $date_f = date('Y-m-d');
                                                                                         <?php } ?>
 
                                                                                         <?php if($usertype!="Admin"){?> 
+                                                                                      
                                                                                             <?php
                                                                                                 include 'db.inc.php';
                                                                                                 include 'queries/dashboardcommitmentqueryvalidated.php';
@@ -408,8 +419,16 @@ $date_f = date('Y-m-d');
                                                                                                 <?php endif; endwhile; ?>
                                                                                         <?php } ?>
                                                                                     </tbody>
+
+                                                                                    <tfoot>
+                                                                                        
+                                                                                    </tfoot>
                                                                                 </table>
                                                                             </div>
+
+                                                                            
+
+
 
                                                                            
 
@@ -524,9 +543,6 @@ $date_f = date('Y-m-d');
                                                                                 }
                                                                             </script>
 
-
-
-                                                                         
                                                                             <script>         
                                                                                     $(document).ready(function(){
                                                                                     $('.prodinfo').click(function(){
@@ -568,7 +584,7 @@ $date_f = date('Y-m-d');
                                                                             </script>
 
                                                                             
-                                                                            <script>
+                                                                            <!--<script>
                                                                                 document.addEventListener('DOMContentLoaded', function () {
                                                                                     if (window.innerWidth > 700) {
                                                                                         mergeCells('table-merge', 1); // Assuming 'Name' column is the second column (index 1)
@@ -607,11 +623,9 @@ $date_f = date('Y-m-d');
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                            </script>
+                                                                            </script>-->
 
-
-
-                                                                        
+                                                                     
                                                                             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                                                                             
                                                                             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
@@ -628,15 +642,21 @@ $date_f = date('Y-m-d');
                                                                             </script>-->
 
                                                                             <script>
-                                                                            $(document).ready(function(){ 
-                                                                            $("#myInput").on("keyup", function() {
-                                                                                var value = $(this).val().toLowerCase();
-                                                                                $("#myTable tr").filter(function() {
-                                                                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                                $(document).ready(function() {
+                                                                                    $("#myInput").on("keyup", function() {
+                                                                                        var value = $(this).val().toLowerCase();
+                                                                                        $("#myTable tr").filter(function() {
+                                                                                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                                                                                        });
+
+                                                                                        // Calculate and display totals when the table is filtered
+                                                                                    
+                                                                                    });
+
                                                                                 });
-                                                                            });
-                                                                            });
                                                                             </script>
+
+
 
 
                                                         </div>

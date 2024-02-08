@@ -58,9 +58,11 @@ $date_f = date('Y-m-d');
                                             <button onclick="goValidated()" type="button" class="btn btn-outline-primary waves-effect waves-light">
                                                 Validated <!--<i class="uil uil-arrow-right ms-2"></i>--> 
                                             </button>
+                                            <?php if($usertype=="Admin"){?> 
                                             <button onclick="goAdvisory()" type="button" class="btn btn-primary waves-effect waves-light">
                                                 <!--<i class="uil uil-check me-2"></i>--> Advisory
                                             </button>
+                                            <?php } ?>
 
                                             <script>
                                                 function goCommitment() {
@@ -100,7 +102,7 @@ $date_f = date('Y-m-d');
                                                                 </div>
 
 <!--################################################################################################ Update Modal Start ######################################################################-->
-                                                                          <!-- Start Modal -->
+                                                            <!-- Start Modal -->
                                                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
@@ -124,21 +126,95 @@ $date_f = date('Y-m-d');
                                                                     </div>
 
                                                         <!-- End Modal -->
+
+                                                        <!-- Start Modal -->
+                                                        <div class="modal fade" id="exampleModal01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body" id="modal-body01">
+                                                                            
+
+
+
+                                                                            
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                <button type="button" class="btn btn-primary" id="submit-btn">Save changes</button>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                        <!-- End Modal -->
+
+                                                         <!-- Start Modal -->
+                                                         <div class="modal fade" id="exampleModal02" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body" id="modal-body02">
+                                                                            
+
+
+
+                                                                            
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                <button type="button" class="btn btn-primary" onclick=addcomm01() id="submit-btn">Save</button>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                        <!-- End Modal -->
+
+
+                                                    <div class="modal fade exampleModalFullscreen04" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-fullscreen">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title h4" id="exampleModalFullscreenLabel">Monitoring Details</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body" id="modal-body04">
+                                                                 
+                                                                   
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 <!--################################################################################################ Update Modal End ######################################################################-->
 
                                                                             <div class="table-responsive" id='table-overallview'>
-                                                                                <table class="table table-bordered border-info wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; width: 500px;" id="yourTableId01">
+                                                                                <table class="table table-bordered border-info wrap table-merge" style="border-collapse: collapse; border-spacing: 0; width: 100%; width: 500px;" id="yourTableId01">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th style="display:none;">ID</th>
+                                                                                            <th >Name</th>   
                                                                                             <th >Commodity</th>
-                                                                                            <th >Barangay</th>
-                                                                                            <th >Name</th>                                                                
+                                                                                            <th >Barangay</th>                                                                                                                                                       
                                                                                             <th >Hills</th>
                                                                                             <th >Date Sown</th>
                                                                                             <th >Date Transplanted</th>
-                                                                                            <th >Date of First Harvest</th>
+                                                                                            <th id="dateOfFirstHarvestTh">Date of First Harvest</th>
                                                                                             <th >Date of Last Harvest</th>
+                                                                                            <th >Status</th>
+                                                                                            <th >Type</th>
+                                                                                            <th >Advisory</th>
+                                                                                            <!--<th class="seeMoreThLabel" >Harvest Monitoring</th>
+                                                                                            <th >Technology Adoption</th>-->
                                                                                             
                                                                                             <?php
                                                                                                 $year_now = date('Y');
@@ -168,86 +244,300 @@ $date_f = date('Y-m-d');
                                                                                     </thead>
 
                                                                                     <tbody id="myTable">
-                                                                                        <?php
-                                                                                            include 'db.inc.php';
-                                                                                            include 'queries/dashboardcommitmentqueryadvisory.php';
-                                                                                           
-                                                                                        while($result1 = mysqli_fetch_array($query1)): ?>
-                                                                                        <tr>
-                                                                                                                            
-                                                                                        
-                                                                                            <td style="display:none;" data-label="Id"><?php echo $result1 ['id']; ?></td>
-                                                                                            <td data-label="Commodity"><?php echo $result1 ['comm']; ?></td>
-                                                                                            <td data-label="Barangay"><?php echo $result1 ['barangay']; ?></td>
-                                                                                            <td data-label="Name"><?php echo $result1 ['name']; ?></td>
-                                                                                            <td data-label="Hills"><?php echo $result1 ['hills']; ?></td>
-                                                                                            <td data-label="Date Sown"><?php echo date('M d, Y', strtotime($result1['date_sown'])); ?></td>
-                                                                                            <td data-label="Date Transplanted"><?php echo date('M d, Y', strtotime($result1['date_trans'])); ?></td>
-                                                                                            <td data-label="Date of First Harvest"><?php echo date('M d, Y', strtotime($result1['date_harvest'])); ?></td>
-                                                                                            <td data-label="Date of Last Harvest"><?php echo date('M d, Y', strtotime($result1['last_harvest_date'])); ?></td>
+                                                                                        <?php if($usertype=="Admin"){?> 
                                                                                             <?php
-                                                                                            for ($week = 1; $week <= 53; $week++) {
-                                                                                                $startDate = new DateTime();
-                                                                                                $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
-
-                                                                                                // Adjust for week 1 starting from the previous year
-                                                                                                if ($week === 1) {
-                                                                                                    $startDate->modify('-0 week');
-                                                                                                }
-
-                                                                                                // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
-                                                                                                $endDate = clone $startDate;
-                                                                                                $endDate->modify('+6 days');
-
-                                                                                                $currentWeek = $result1['Week' . $week];
-                                                                                                echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "' style=\"";
+                                                                                                include 'db.inc.php';
+                                                                                                include 'queries/dashboardcommitmentqueryadvisory.php';
+                                                                                            
+                                                                                                while($result1 = mysqli_fetch_array($query1)): 
+                                                                                                if ($usertype=="Admin" || $result1['barangay'] == $userass_brgy):?>
+                                                                                            <tr>
+                                                                                                                                
+                                                                                            
+                                                                                                <td style="display:none;" data-label="Id"><?php echo $result1 ['id']; ?></td>
+                                                                                                <td data-label="Name"><?php echo $result1 ['name']; ?></td>
+                                                                                                <td data-label="Commodity"><?php echo $result1 ['comm']; ?></td>
+                                                                                                <td data-label="Barangay"><?php echo $result1 ['barangay']; ?></td>
+                                                                                                <td data-label="Hills"><?php echo $result1 ['hills']; ?></td>
+                                                                                                <td data-label="Date Sown"><?php echo date('M d, Y', strtotime($result1['date_sown'])); ?></td>
+                                                                                                <td data-label="Date Transplanted"><?php echo date('M d, Y', strtotime($result1['date_trans'])); ?></td>
+                                                                                                <td id="dateOfFirstHarvestTd" data-label="Date of First Harvest"><?php echo date('M d, Y', strtotime($result1['date_harvest'])); ?></td>
+                                                                                                <td data-label="Date of Last Harvest"><?php echo date('M d, Y', strtotime($result1['last_harvest_date'])); ?></td>
+                                                                                                <td data-label="Status"><?php echo $result1 ['status_from_admin']; ?></td>
+                                                                                                <td data-label="Type"><?php echo $result1 ['status_comm']; ?></td>
+                                                                                                <td data-label="Advisory"><a class="prodinfo01 btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['id'];?>"><i class="uil-file-search-alt"></i></a></td>
+                                                                                                <!--<td class="seeMoreTdLabel" data-label="Harvest Monitoring"><a class='monitorinfo02 btn btn-info' href="dashboardcommitmentvalidateddetails.php?code=<?php echo $result1['code']; ?>"> <i class="uil-search-plus"></i> </a></td>
+                                                                                                <td data-label="Technology Adoption">
+                                                                                                    <a class="techinfo01a btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['code']; ?>"><i class="uil-search-plus"></i></a>
+                                                                                                </td>-->
+                                                                                            
                                                                                                 
-                                                                                                if ($result1['status' . $week] == 'On Track') {
-                                                                                                    echo "background:green; color: white;";
-                                                                                                } elseif ($result1['status' . $week] == 'Partially Damaged') {
-                                                                                                    echo "background:orange; color: white;";
-                                                                                                } elseif ($result1['status' . $week] == 'Totally Damaged') {
-                                                                                                    echo "background:red; color: white;";
-                                                                                                }
-
-                                                                                                echo "\">
-                                                                                                    <span style=\"font-weight: bold;\">";
                                                                                                 
-                                                                                                if ($result1['Week' . $week] == 0) {
-                                                                                                    echo "";
-                                                                                                } else {
-                                                                                                    echo number_format($result1['Week' . $week], 2);
-                                                                                                }
+                                                                                            
+                                                                                                    <?php
+                                                                                                    for ($week = 1; $week <= 53; $week++) {
+                                                                                                        $startDate = new DateTime();
+                                                                                                        $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
 
-                                                                                                echo "</span>
-                                                                                                    [<span style=\"font-style: italic;\">";
-                                                                                                echo $result1['status' . $week];
-                                                                                                echo "</span>]
-                                                                                                    </td>";
-                                                                                            }
-                                                                                            ?>
+                                                                                                        // Adjust for week 1 starting from the previous year
+                                                                                                        if ($week === 1) {
+                                                                                                            $startDate->modify('-0 week');
+                                                                                                        }
 
-                                                                                           
+                                                                                                        // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
+                                                                                                        $endDate = clone $startDate;
+                                                                                                        $endDate->modify('+6 days');
 
-                                                                                            <td data-label="Action">
-                                                                                                <a class="prodinfo btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['id'];?>"><i class="uil-file-search-alt"></i></a>
-                                                                                                <a onClick="deleteme('<?php echo $result1['code'];?>')" class="btn btn-raised btn-danger waves-effect"><i class="uil-trash-alt"></i></a>
-                                                                                            </td>
-                                                                                                                                    
-                                                                                        </tr>
-                                                                                            <?php endwhile; ?>
+                                                                                                        $currentWeek = $result1['Week' . $week];
+                                                                                                        echo "<td class='toggletd' data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "' style=\"";
+                                                                                                        
+                                                                                                        if ($result1['status' . $week] == 'On Track') {
+                                                                                                            echo "background:green; color: white;";
+                                                                                                        } elseif ($result1['status' . $week] == 'Partially Damaged') {
+                                                                                                            echo "background:orange; color: white;";
+                                                                                                        } elseif ($result1['status' . $week] == 'Totally Damaged') {
+                                                                                                            echo "background:red; color: white;";
+                                                                                                        }
+
+                                                                                                        echo "\">
+                                                                                                            <span style=\"font-weight: bold;\">";
+                                                                                                        
+                                                                                                        if ($result1['Week' . $week] == 0) {
+                                                                                                            echo "";
+                                                                                                        } else {
+                                                                                                            echo "<a class='weeklyinfo01' data-id='{$result1['id' . $week]}'>" . number_format($result1['Week' . $week], 2) . "</a>";
+                                                                                                        }
+
+                                                                                                        echo "</span>
+                                                                                                            [<span style=\"font-style: italic;\">";
+                                                                                                        echo $result1['status' . $week];
+                                                                                                        echo "</span>]
+                                                                                                            </td>";
+                                                                                                    }
+                                                                                                    ?>
+                                                                                        
+
+                                                                                            
+
+                                                                                                <td data-label="Action">
+                                                                                                    <!--<a class="prodinfo btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['id'];?>"><i class="uil-file-search-alt"></i></a>-->
+                                                                                                    <!--<a onClick="approveme('<?php echo $result1['code'];?>')" class="btn btn-raised btn-success waves-effect"><i class="uil-thumbs-up"></i></a>-->
+                                                                                                    <a onClick="deleteme('<?php echo $result1['code'];?>')" class="btn btn-raised btn-danger waves-effect"><i class="uil-trash-alt"></i></a>
+                                                                                                </td>
+
+                                                                                                
+                                                                                                                                        
+                                                                                            </tr>
+                                                                                                <?php endif; endwhile; ?>
+                                                                                        <?php } ?>
+
+                                                                                        <?php if($usertype!="Admin"){?> 
+                                                                                            <?php
+                                                                                                include 'db.inc.php';
+                                                                                                include 'queries/dashboardcommitmentqueryadvisory.php';
+                                                                                            
+                                                                                                while($result1 = mysqli_fetch_array($query1)): 
+                                                                                                if ($result1['barangay'] == $userass_brgy):?>
+                                                                                            <tr>
+                                                                                                                                
+                                                                                            
+                                                                                                <td style="display:none;" data-label="Id"><?php echo $result1 ['id']; ?></td>
+                                                                                                <td data-label="Name"><?php echo $result1 ['name']; ?></td>
+                                                                                                <td data-label="Commodity"><?php echo $result1 ['comm']; ?></td>
+                                                                                                <td data-label="Barangay"><?php echo $result1 ['barangay']; ?></td>
+                                                                                                <td data-label="Hills"><?php echo $result1 ['hills']; ?></td>
+                                                                                                <td data-label="Date Sown"><?php echo date('M d, Y', strtotime($result1['date_sown'])); ?></td>
+                                                                                                <td data-label="Date Transplanted"><?php echo date('M d, Y', strtotime($result1['date_trans'])); ?></td>
+                                                                                                <td id="dateOfFirstHarvestTd" data-label="Date of First Harvest"><?php echo date('M d, Y', strtotime($result1['date_harvest'])); ?></td>
+                                                                                                <td data-label="Date of Last Harvest"><?php echo date('M d, Y', strtotime($result1['last_harvest_date'])); ?></td>
+                                                                                                <td data-label="Status"><?php echo $result1 ['status_from_admin']; ?></td>
+                                                                                                <td data-label="Type"><?php echo $result1 ['status_comm']; ?></td>
+                                                                                                <td class="seeMoreTdLabel" data-label="Harvest Monitoring"><a class='monitorinfo02 btn btn-info' href="dashboardcommitmentvalidateddetails.php?code=<?php echo $result1['code']; ?>"> <i class="uil-search-plus"></i> </a></td>
+                                                                                                <td data-label="Technology Adoption">
+                                                                                                    <a class="techinfo01b btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['code']; ?>"><i class="uil-search-plus"></i></a>
+                                                                                                </td>
+                                                                                            
+                                                                                                
+                                                                                                
+                                                                                            
+                                                                                                    <?php
+                                                                                                    for ($week = 1; $week <= 53; $week++) {
+                                                                                                        $startDate = new DateTime();
+                                                                                                        $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
+
+                                                                                                        // Adjust for week 1 starting from the previous year
+                                                                                                        if ($week === 1) {
+                                                                                                            $startDate->modify('-0 week');
+                                                                                                        }
+
+                                                                                                        // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
+                                                                                                        $endDate = clone $startDate;
+                                                                                                        $endDate->modify('+6 days');
+
+                                                                                                        $currentWeek = $result1['Week' . $week];
+                                                                                                        echo "<td class='toggletd' data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "' style=\"";
+                                                                                                        
+                                                                                                        if ($result1['status' . $week] == 'On Track') {
+                                                                                                            echo "background:green; color: white;";
+                                                                                                        } elseif ($result1['status' . $week] == 'Partially Damaged') {
+                                                                                                            echo "background:orange; color: white;";
+                                                                                                        } elseif ($result1['status' . $week] == 'Totally Damaged') {
+                                                                                                            echo "background:red; color: white;";
+                                                                                                        }
+
+                                                                                                        echo "\">
+                                                                                                            <span style=\"font-weight: bold;\">";
+                                                                                                        
+                                                                                                        if ($result1['Week' . $week] == 0) {
+                                                                                                            echo "";
+                                                                                                        } else {
+                                                                                                            echo "<a class='weeklyinfo' data-id='{$result1['id' . $week]}'>" . number_format($result1['Week' . $week], 2) . "</a>";
+
+                                                                                                        }
+
+                                                                                                        echo "</span>
+                                                                                                            [<span style=\"font-style: italic;\">";
+                                                                                                        echo $result1['status' . $week];
+                                                                                                        echo "</span>]
+                                                                                                            </td>";
+                                                                                                    }
+                                                                                                    ?>
+
+                                                                                                <td data-label="Action">
+                                                                                                    <!--<a class="prodinfo btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['id'];?>"><i class="uil-file-search-alt"></i></a>-->
+                                                                                                    <a onClick="approveme('<?php echo $result1['code'];?>')" class="btn btn-raised btn-success waves-effect"><i class="uil-thumbs-up"></i></a>
+                                                                                                    <a onClick="deleteme('<?php echo $result1['code'];?>')" class="btn btn-raised btn-danger waves-effect"><i class="uil-trash-alt"></i></a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                                <?php endif; endwhile; ?>
+                                                                                        <?php } ?>
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
 
+                                                                           
 
                                                                             <script>         
+                                                                                $(document).ready(function(){
+                                                                                $('.weeklyinfo').click(function(){
+                                                                                    var id = $(this).data('id');
+                                                                                
+                                                                                    $.ajax({
+                                                                                                url:"dashboardcommitmentvalidatedviewrowid.php",
+                                                                                                method:"POST",
+                                                                                                data:{id:id},
+                                                                                                success:function(data){
+                                                                                                    $('#modal-body04').html(data);
+                                                                                                    $('.exampleModalFullscreen04').modal('show');
+                                                                                                    displayData();
+                                                                                                }
+                                                                                            });
+                                                                                    })
+                                                                                })
+                                                                            </script>
+
+                                                                            <script>         
+                                                                                $(document).ready(function(){
+                                                                                $('.weeklyinfo01').click(function(){
+                                                                                    var id = $(this).data('id');
+                                                                                
+                                                                                    $.ajax({
+                                                                                                url:"dashboardcommitmentvalidatedviewrowid.php",
+                                                                                                method:"POST",
+                                                                                                data:{id:id},
+                                                                                                success:function(data){
+                                                                                                    $('#modal-body04').html(data);
+                                                                                                    $('.exampleModalFullscreen04').modal('show');
+                                                                                                    displayData();
+                                                                                                }
+                                                                                            });
+                                                                                    })
+                                                                                })
+                                                                            </script>
+
+                                                                            <script>         
+                                                                                $(document).ready(function(){
+                                                                                $('.techinfo01a').click(function(){
+                                                                                    var id = $(this).data('id');
+                                                                                
+                                                                                    $.ajax({
+                                                                                                url:"dashboardcommitmentvalidatedtechadoptfetch.php",
+                                                                                                method:"POST",
+                                                                                                data:{id:id},
+                                                                                                success:function(data){
+                                                                                                    $('#modal-body02').html(data);
+                                                                                                    $('#exampleModal02').modal('show');
+                                                                                                    displayData();
+                                                                                                }
+                                                                                            });
+                                                                                    })
+                                                                                })
+                                                                            </script>
+
+                                                                            
+                                                                            <script>
+                                                                                function addcomm01(){
+                                                                                    var data = {                                 
+                                                                                        prop_code: $(".prop_code").val(),
+                                                                                        prop_date: $(".prop_date").val(),
+                                                                                        prop1: $(".prop1").is(":checked") ? 1 : 0,
+                                                                                        prop2: $(".prop2").is(":checked") ? 1 : 0,
+                                                                                        prop3: $(".prop3").is(":checked") ? 1 : 0,
+                                                                                        prop4: $(".prop4").is(":checked") ? 1 : 0,
+                                                                                        prop5: $(".prop5").is(":checked") ? 1 : 0,
+                                                                                        prop6: $(".prop6").is(":checked") ? 1 : 0,
+                                                                                        prop7: $(".prop7").is(":checked") ? 1 : 0,
+                                                                                        prop8: $(".prop8").is(":checked") ? 1 : 0,
+                                                                                        prop9: $(".prop9").is(":checked") ? 1 : 0,
+                                                                                        prop10: $(".prop10").is(":checked") ? 1 : 0,
+                                                                                        prop11: $(".prop11").is(":checked") ? 1 : 0,
+                                                                                        prop12: $(".prop12").is(":checked") ? 1 : 0,
+                                                                                        prop13: $(".prop13").is(":checked") ? 1 : 0,
+                                                                                        prop14: $(".prop14").is(":checked") ? 1 : 0,
+                                                                                        prop15: $(".prop15").is(":checked") ? 1 : 0,
+                                                                                        prop16: $(".prop16").is(":checked") ? 1 : 0,
+                                                                                        prop17: $(".prop17").is(":checked") ? 1 : 0,
+                                                                                        prop18: $(".prop18").is(":checked") ? 1 : 0,
+                                                                                        prop_tot_score: $(".prop_tot_score").val(),
+                                                                                        prop_final_score: $(".prop_final_score").val(),
+                                                                                        prop_remarks: $(".prop_remarks").val(),
+                                                                                        prop_created_date: $(".prop_created_date").val(),
+                                                                                        prop_encoder: $(".prop_encoder").val(),
+                                                                                      
+                                                                                    };
+                                                                                    
+                                                                                            $.ajax({
+                                                                                                    url:"dashboardcommitmentvalidatedtechadoptprocess.php",
+                                                                                                    method:"POST",
+                                                                                                    data:data,
+                                                                                                    success:function(data,status){
+                                                                                                    
+                                                                                                        Swal.fire({
+                                                                                                        title: 'Success',
+                                                                                                        text: 'Saved successfully!',
+                                                                                                        icon: 'success',
+                                                                                                        timer: 2000
+                                                                                                        }).then(() => {
+                                                                                                            $('#myModal').modal('hide');                                               
+                                                                                                        window.location.reload();
+                                                                                                        }); 
+                                                                                                        
+                                                                                                        
+                                                                                                    }
+                                                                                                });
+                                                                                }
+                                                                            </script>
+
+
+
+                                                                         
+                                                                            <script>         
                                                                                     $(document).ready(function(){
-                                                                                    $('.prodinfo').click(function(){
+                                                                                    $('.prodinfo01').click(function(){
                                                                                         var id = $(this).data('id');
                                                                                     
                                                                                         $.ajax({
-                                                                                                    url:"dashboardcommitmentupdate.php",
+                                                                                                    url:"dashboardcommitmentadvisoryupdated.php",
                                                                                                     method:"POST",
                                                                                                     data:{id:id},
                                                                                                     success:function(data){
@@ -260,6 +550,70 @@ $date_f = date('Y-m-d');
                                                                                     })
                                                                                 })
                                                                             </script>
+
+                                                                            <script>         
+                                                                                    $(document).ready(function(){
+                                                                                    $('.toggleinfo').click(function(){
+                                                                                        var id = $(this).data('id');
+                                                                                    
+                                                                                        $.ajax({
+                                                                                                    url:"dashboardcommitmentvalidatedfetch.php",
+                                                                                                    method:"POST",
+                                                                                                    data:{id:id},
+                                                                                                    success:function(data){
+                                                                                                        $('#modal-body01').html(data);
+                                                                                                        $('#exampleModal01').modal('show');
+                                                                                                        displayData();
+                                                                                                    }
+                                                                                                });
+
+                                                                                    })
+                                                                                })
+                                                                            </script>
+
+                                                                            
+                                                                            <!--<script>
+                                                                                document.addEventListener('DOMContentLoaded', function () {
+                                                                                    if (window.innerWidth > 700) {
+                                                                                        mergeCells('table-merge', 1); // Assuming 'Name' column is the second column (index 1)
+                                                                                    }
+                                                                                });
+
+                                                                                function mergeCells(tableClass, columnIndex) {
+                                                                                    var tables = document.getElementsByClassName(tableClass);
+
+                                                                                    for (var t = 0; t < tables.length; t++) {
+                                                                                        var table = tables[t];
+                                                                                        var rows = table.getElementsByTagName('tr');
+                                                                                        var lastValue = null;
+                                                                                        var rowspan = 1;
+
+                                                                                        for (var i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+                                                                                            var currentRow = rows[i];
+                                                                                            var currentValue = currentRow.cells[columnIndex].textContent;
+
+                                                                                            if (currentValue === lastValue) {
+                                                                                                rowspan++;
+                                                                                                currentRow.deleteCell(columnIndex);
+                                                                                            } else {
+                                                                                                if (rowspan > 1) {
+                                                                                                    rows[i - rowspan].cells[columnIndex].rowSpan = rowspan;
+                                                                                                    rowspan = 1;
+                                                                                                }
+
+                                                                                                lastValue = currentValue;
+                                                                                            }
+                                                                                        }
+
+                                                                                        // Check for rowspan at the end
+                                                                                        if (rowspan > 1) {
+                                                                                            rows[rows.length - rowspan].cells[columnIndex].rowSpan = rowspan;
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            </script>-->
+
+
 
                                                                         
                                                                             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -351,38 +705,76 @@ $date_f = date('Y-m-d');
                                                                                     </thead>
 
                                                                                     <tbody id="myTable2">
-                                                                                        <?php
-                                                                                            include 'db.inc.php';
-                                                                                            include 'queries/dashboardcommitmentqueryadvisory.php';
-                                                                                        while($result1 = mysqli_fetch_array($query2)): ?>
-                                                                                        <tr>
-                                                                                        
-                                                                                            <td data-label="Commodity"><?php echo $result1 ['comm']; ?></td>
-                                                                                        
+                                                                                        <?php if($usertype=="Admin"){?> 
                                                                                             <?php
-                                                                                                for ($week = 1; $week <= 53; $week++) {
-                                                                                                    $startDate = new DateTime();
-                                                                                                    $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
+                                                                                                include 'db.inc.php';
+                                                                                                include 'queries/dashboardcommitmentqueryadvisory.php';
+                                                                                            while($result1 = mysqli_fetch_array($query2)):   
+                                                                                            if ($usertype == "Admin" || $result1['barangay'] == $userass_brgy):?>
+                                                                                            <tr>
+                                                                                            
+                                                                                                <td data-label="Commodity"><?php echo $result1 ['comm']; ?></td>
+                                                                                            
+                                                                                                <?php
+                                                                                                    for ($week = 1; $week <= 53; $week++) {
+                                                                                                        $startDate = new DateTime();
+                                                                                                        $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
 
-                                                                                                    // Adjust for week 1 starting from the previous year
-                                                                                                    if ($week === 1) {
-                                                                                                        $startDate->modify('-0 week');
+                                                                                                        // Adjust for week 1 starting from the previous year
+                                                                                                        if ($week === 1) {
+                                                                                                            $startDate->modify('-0 week');
+                                                                                                        }
+
+                                                                                                        // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
+                                                                                                        $endDate = clone $startDate;
+                                                                                                        $endDate->modify('+6 days');
+
+                                                                                                        $currentWeek = $result1['Week' . $week];
+
+                                                                                                        $value = $result1['Week' . $week];
+                                                                                                        echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "'>";
+                                                                                                        echo ($value == 0) ? "" : number_format($value, 2);
+                                                                                                        echo "</td>";
                                                                                                     }
+                                                                                                ?>                       
+                                                                                            </tr>
+                                                                                            <?php endif; endwhile; ?>
+                                                                                        <?php } ?>
+                                                                                        <?php if($usertype!="Admin"){?> 
+                                                                                            <?php
+                                                                                                include 'db.inc.php';
+                                                                                                include 'queries/dashboardcommitmentqueryadvisory.php';
+                                                                                            while($result1 = mysqli_fetch_array($query2)):   
+                                                                                            if ($result1['barangay'] == $userass_brgy):?>
+                                                                                            <tr>
+                                                                                            
+                                                                                                <td data-label="Commodity"><?php echo $result1 ['comm']; ?></td>
+                                                                                            
+                                                                                                <?php
+                                                                                                    for ($week = 1; $week <= 53; $week++) {
+                                                                                                        $startDate = new DateTime();
+                                                                                                        $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
 
-                                                                                                    // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
-                                                                                                    $endDate = clone $startDate;
-                                                                                                    $endDate->modify('+6 days');
+                                                                                                        // Adjust for week 1 starting from the previous year
+                                                                                                        if ($week === 1) {
+                                                                                                            $startDate->modify('-0 week');
+                                                                                                        }
 
-                                                                                                    $currentWeek = $result1['Week' . $week];
+                                                                                                        // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
+                                                                                                        $endDate = clone $startDate;
+                                                                                                        $endDate->modify('+6 days');
 
-                                                                                                    $value = $result1['Week' . $week];
-                                                                                                    echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "'>";
-                                                                                                    echo ($value == 0) ? "" : number_format($value, 2);
-                                                                                                    echo "</td>";
-                                                                                                }
-                                                                                            ?>                       
-                                                                                        </tr>
-                                                                                            <?php endwhile; ?>
+                                                                                                        $currentWeek = $result1['Week' . $week];
+
+                                                                                                        $value = $result1['Week' . $week];
+                                                                                                        echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "'>";
+                                                                                                        echo ($value == 0) ? "" : number_format($value, 2);
+                                                                                                        echo "</td>";
+                                                                                                    }
+                                                                                                ?>                       
+                                                                                            </tr>
+                                                                                            <?php endif; endwhile; ?>
+                                                                                        <?php } ?>
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -462,46 +854,77 @@ $date_f = date('Y-m-d');
                                                                                     </thead>
 
                                                                                     <tbody id="myTable3">
-                                                                                        <?php
-                                                                                        include 'db.inc.php';
-                                                                                        include 'queries/dashboardcommitmentqueryadvisory.php';
-                                                                                        while($result1 = mysqli_fetch_array($query3)): ?>
-                                                                                        <tr>
-                                                                                        
-                                                                                            <td data-label="Name"><?php echo $result1 ['name']; ?></td>
-                                                                                            
+                                                                                        <?php if($usertype!="Admin"){?> 
                                                                                             <?php
-                                                                                                for ($week = 1; $week <= 53; $week++) {
-                                                                                                    $startDate = new DateTime();
-                                                                                                    $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
+                                                                                            include 'db.inc.php';
+                                                                                            include 'queries/dashboardcommitmentqueryadvisory.php';
+                                                                                            while($result1 = mysqli_fetch_array($query3)): 
+                                                                                                if ($result1['barangay'] == $userass_brgy): ?>
+                                                                                            <tr>
+                                                                                            
+                                                                                                <td data-label="Name"><?php echo $result1 ['name']; ?></td>
+                                                                                                
+                                                                                                <?php
+                                                                                                    for ($week = 1; $week <= 53; $week++) {
+                                                                                                        $startDate = new DateTime();
+                                                                                                        $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
 
-                                                                                                    // Adjust for week 1 starting from the previous year
-                                                                                                    if ($week === 1) {
-                                                                                                        $startDate->modify('-0 week');
+                                                                                                        // Adjust for week 1 starting from the previous year
+                                                                                                        if ($week === 1) {
+                                                                                                            $startDate->modify('-0 week');
+                                                                                                        }
+
+                                                                                                        // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
+                                                                                                        $endDate = clone $startDate;
+                                                                                                        $endDate->modify('+6 days');
+
+                                                                                                        $currentWeek = $result1['Week' . $week];
+
+                                                                                                        $value = $result1['Week' . $week];
+                                                                                                        echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "'>";
+                                                                                                        echo ($value == 0) ? "" : number_format($value, 2);
+                                                                                                        echo "</td>";
                                                                                                     }
+                                                                                                ?>                              
+                                                                                            </tr>
+                                                                                                <?php endif; endwhile; ?>
+                                                                                        <?php } ?>
 
-                                                                                                    // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
-                                                                                                    $endDate = clone $startDate;
-                                                                                                    $endDate->modify('+6 days');
+                                                                                        <?php if($usertype=="Admin"){?> 
+                                                                                            <?php
+                                                                                            include 'db.inc.php';
+                                                                                            include 'queries/dashboardcommitmentqueryadvisory.php';
+                                                                                            while($result1 = mysqli_fetch_array($query3)): 
+                                                                                                if ($usertype="Admin" || $result1['barangay'] == $userass_brgy): ?>
+                                                                                            <tr>
+                                                                                            
+                                                                                                <td data-label="Name"><?php echo $result1 ['name']; ?></td>
+                                                                                                
+                                                                                                <?php
+                                                                                                    for ($week = 1; $week <= 53; $week++) {
+                                                                                                        $startDate = new DateTime();
+                                                                                                        $startDate->setISODate($year, $week, 1); // Setting the day of the week to Monday (1)
 
-                                                                                                    $currentWeek = $result1['Week' . $week];
+                                                                                                        // Adjust for week 1 starting from the previous year
+                                                                                                        if ($week === 1) {
+                                                                                                            $startDate->modify('-0 week');
+                                                                                                        }
 
-                                                                                                    $value = $result1['Week' . $week];
-                                                                                                    echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "'>";
-                                                                                                    echo ($value == 0) ? "" : number_format($value, 2);
-                                                                                                    echo "</td>";
-                                                                                                }
-                                                                                            ?>  
+                                                                                                        // Calculate the END date by adding 6 days to the starting date (ending on Sunday)
+                                                                                                        $endDate = clone $startDate;
+                                                                                                        $endDate->modify('+6 days');
 
+                                                                                                        $currentWeek = $result1['Week' . $week];
 
-                                                                                
-
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                                                                    
-                                                                                        </tr>
-                                                                                            <?php endwhile; ?>
+                                                                                                        $value = $result1['Week' . $week];
+                                                                                                        echo "<td data-label='W$week " . $startDate->format('M d') . " - " . $endDate->format('M d') . "'>";
+                                                                                                        echo ($value == 0) ? "" : number_format($value, 2);
+                                                                                                        echo "</td>";
+                                                                                                    }
+                                                                                                ?>                              
+                                                                                            </tr>
+                                                                                                <?php endif; endwhile; ?>
+                                                                                        <?php } ?>
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -550,7 +973,7 @@ $date_f = date('Y-m-d');
                                                             'Your file has been deleted.',
                                                             'success'
                                                             ).then(() => {
-                                                                window.location.href='dashboardcommitmentprocess.php?delete=' +delid+ '';
+                                                                window.location.href='dashboardcommitmentvalidatedprocess.php?delete=' +delid+ '';
                                                                 });
                                                         
                                                         } else if (
@@ -560,6 +983,48 @@ $date_f = date('Y-m-d');
                                                             swalWithBootstrapButtons.fire(
                                                             'Cancelled',
                                                             'Your imaginary file is safe :)',
+                                                            'error'
+                                                            )
+                                                        }
+                                                        })
+                                                        }
+                                                    </script>
+
+                                                    <script>
+                                                            function approveme(approveid){
+                                                            const swalWithBootstrapButtons = Swal.mixin({
+                                                        customClass: {
+                                                            confirmButton: 'btn btn-success',
+                                                            cancelButton: 'btn btn-danger'
+                                                        },
+                                                        buttonsStyling: false
+                                                        })
+
+                                                        swalWithBootstrapButtons.fire({
+                                                        title: 'Are you sure you want to approve this entry?',
+                                                        text: "You won't be able to revert this!",
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonText: 'Yes, approve it!',
+                                                        cancelButtonText: 'No, cancel!',
+                                                        reverseButtons: true
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            swalWithBootstrapButtons.fire(
+                                                            'Approved!',
+                                                            'The file has been approved.',
+                                                            'success'
+                                                            ).then(() => {
+                                                                window.location.href='dashboardcommitmentvalidatedprocess.php?approve=' +approveid+ '';
+                                                                });
+                                                        
+                                                        } else if (
+                                                            /* Read more about handling dismissals below */
+                                                            result.dismiss === Swal.DismissReason.cancel
+                                                        ) {
+                                                            swalWithBootstrapButtons.fire(
+                                                            'Cancelled',
+                                                            'Your file is still unapproved :)',
                                                             'error'
                                                             )
                                                         }

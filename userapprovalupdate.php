@@ -87,13 +87,10 @@
                                                                 <div class="col-md-12">
                                                                     <div class="mb-3">
                                                                         <div class="commo">
-                                                                        <label for="component1">Component</label>                                                       
-                                                                            <select id="component1" class="form-select" name="component1">
-                                                                                <option value="<?php echo $q['component'];?>"><?php echo $q['component'];?></option>
-                                                                                <option value="AgriBloom">AgriBloom</option>
-                                                                                <option value="AgriMart">AgriMart</option>
-                                                                                <option value="AgriComms">AgriComms</option>
-                                                                                <option value="None">None</option>
+                                                                        <label for="component1">Usertype</label>                                                       
+                                                                            <select id="usertype1" class="form-select" name="usertype1">
+                                                                                <option value="<?php echo $q['type'];?>"><?php echo $q['type'];?></option>
+                                                                                <option value="Employee">Employee</option>
                                                                                 <option value="Admin">Admin</option>
                                                                             </select> 
                                                                             </div>                                        

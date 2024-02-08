@@ -1,3 +1,4 @@
+   <?php $yearnow=date('Y'); ?>
 <?php
 $query1 = mysqli_query($conn,"SELECT
 production_cms.id,

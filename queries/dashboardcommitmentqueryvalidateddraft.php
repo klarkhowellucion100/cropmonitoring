@@ -298,6 +298,9 @@ production_validated_cms.name ASC;
 
 
 
+
+
+
 $query2 = mysqli_query($conn,"SELECT production_validated_cms.comm,  
 YEAR(production_validated_cms.date_harvest) AS prod_year,
 registrationhubpos.barangay,

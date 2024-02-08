@@ -261,7 +261,7 @@ $result = mysqli_fetch_assoc($data);
                                 </a>
                             </li>
 
-
+                            <?php if($usertype=="Admin"){?> 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="uil-file-alt"></i>
@@ -295,23 +295,26 @@ $result = mysqli_fetch_assoc($data);
                                     </li>
                                 </ul>
                             </li>
+                            <?php } ?>
 
                      
-
+                     
                         <li class="menu-title">Admin</li>
+                        <?php if($usertype=="Admin"){?> 
                             <li>
                                 <a href="userapproval.php">
                                     <i class="uil-user-circle"></i>
                                     <span>Approval</span>
                                 </a>
                             </li>
+                        <?php } ?>
                             <li>
                                 <a style='cursor:pointer;' href="logoutprocess.php">
                                     <i class="uil-sign-out-alt"></i>
                                     <span>Logout</span>
                                 </a>
                             </li>
-
+                     
                       
    <!--
                         <li>

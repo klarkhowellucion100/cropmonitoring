@@ -15,6 +15,18 @@ if (isset($_GET['delete'])) {
 } if($result){
   $query3="DELETE FROM monitoring_production_cms WHERE code='$id'";
   $result3 = mysqli_query($conn,$query3);
+} if($result3){
+    $query4="DELETE FROM controlagent_monitoring_cms WHERE code_from='$id'";
+    $result4 = mysqli_query($conn,$query4);
+} if($result4){
+    $query5="DELETE FROM fertilizer_monitoring_cms WHERE code_from='$id'";
+    $result5 = mysqli_query($conn,$query5);
+} if($result5){
+    $query6="DELETE FROM pest_monitoring_cms WHERE code_from='$id'";
+    $result6 = mysqli_query($conn,$query6);
+} if($result6){
+    $query7="DELETE FROM tech_adoption_cms WHERE prop_code='$id'";
+    $result7 = mysqli_query($conn,$query7);
 }
 ?>
 

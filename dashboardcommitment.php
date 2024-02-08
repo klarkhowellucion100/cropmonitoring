@@ -58,9 +58,12 @@ $date_f = date('Y-m-d');
                                             <button onclick="goValidated()" type="button" class="btn btn-outline-primary waves-effect waves-light">
                                                 Validated <!--<i class="uil uil-arrow-right ms-2"></i>--> 
                                             </button>
+
+                                            <?php if($usertype=="Admin"){?> 
                                             <button onclick="goAdvisory()" type="button" class="btn btn-outline-primary waves-effect waves-light">
                                                 <!--<i class="uil uil-check me-2"></i>--> Advisory
                                             </button>
+                                            <?php } ?>
 
                                             <script>
                                                 function goCommitment() {
@@ -346,7 +349,7 @@ $date_f = date('Y-m-d');
                                                                                             
 
                                                                                                 <td data-label="Action">
-                                                                                                    <a class="prodinfo btn btn-raised btn-info waves-effect" data-id="<?php echo $result1['id'];?>"><i class="uil-file-search-alt"></i></a>
+                                                                                                    <a class="prodinfo btn btn-raised btn-info waves-effect" href="" data-id="<?php echo $result1['id'];?>"><i class="uil-file-search-alt"></i></a>
                                                                                                     <a onClick="deleteme('<?php echo $result1['code'];?>')" class="btn btn-raised btn-danger waves-effect"><i class="uil-trash-alt"></i></a>
                                                                                                 </td>            
                                                                                             </tr>
@@ -401,7 +404,7 @@ $date_f = date('Y-m-d');
                                                                             </script>
 
                                                                             
-                                                                            <script>
+                                                                            <!--<script>
                                                                                 document.addEventListener('DOMContentLoaded', function () {
                                                                                     if (window.innerWidth > 700) {
                                                                                         mergeCells('table-merge', 1); // Assuming 'Name' column is the second column (index 1)
@@ -440,7 +443,7 @@ $date_f = date('Y-m-d');
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                            </script>
+                                                                            </script>-->
 
 
 
@@ -829,7 +832,9 @@ $date_f = date('Y-m-d');
                 
 
 
-                        
+                        <div>
+                            
+                        </div>
                     
 
 
