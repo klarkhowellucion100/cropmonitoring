@@ -293,7 +293,7 @@ GROUP BY
     production_validated_cms.comm,
     production_validated_cms.code
 ORDER BY
-production_validated_cms.name ASC;
+production_validated_cms.date_sown DESC;
 ");
 
 
